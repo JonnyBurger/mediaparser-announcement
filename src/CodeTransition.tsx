@@ -1,4 +1,4 @@
-import { interpolate, spring, useVideoConfig } from "remotion";
+import { AbsoluteFill, interpolate, spring, useVideoConfig } from "remotion";
 import { continueRender, delayRender, useCurrentFrame } from "remotion";
 import { Pre, HighlightedCode, AnnotationHandler } from "codehike/code";
 import React, { useEffect, useLayoutEffect, useMemo, useState } from "react";
@@ -15,16 +15,17 @@ import { tokenTransitions } from "./annotations/InlineToken";
 import { errorInline, errorMessage } from "./annotations/Error";
 import { fontFamily, fontSize, lineHeight, tabSize } from "./font";
 import { getTextDimensions } from "./calculate-metadata/get-text-dimensions";
+import { PADDDING_X, TOP_EXPLAINER_HEIGHT, TopExplainer } from "./TopExplainer";
 
 export function CodeTransition({
-  oldCode,
-  newCode,
+  previousCode,
+  currentCode,
 }: {
-  readonly oldCode: HighlightedCode | null;
-  readonly newCode: HighlightedCode;
+  readonly previousCode: HighlightedCode | null;
+  readonly currentCode: HighlightedCode;
 }) {
   const frame = useCurrentFrame();
-  const { width, height, fps } = useVideoConfig();
+  const { height, fps } = useVideoConfig();
 
   const ref = React.useRef<HTMLPreElement>(null);
   const [oldSnapshot, setOldSnapshot] =
@@ -32,12 +33,12 @@ export function CodeTransition({
   const [handle] = React.useState(() => delayRender());
 
   const prevCode: HighlightedCode = useMemo(() => {
-    return oldCode || { ...newCode, tokens: [], annotations: [] };
-  }, [newCode, oldCode]);
+    return previousCode || { ...currentCode, tokens: [], annotations: [] };
+  }, [currentCode, previousCode]);
 
   const code = useMemo(() => {
-    return oldSnapshot ? newCode : prevCode;
-  }, [newCode, prevCode, oldSnapshot]);
+    return oldSnapshot ? currentCode : prevCode;
+  }, [currentCode, prevCode, oldSnapshot]);
 
   const progress = (delay: number) =>
     spring({
@@ -62,6 +63,7 @@ export function CodeTransition({
       setOldSnapshot(getStartingSnapshot(ref.current!));
       return;
     }
+
     const transitions = calculateTransitions(ref.current!, oldSnapshot);
 
     transitions.forEach(({ element, keyframes, options }) => {
@@ -80,20 +82,12 @@ export function CodeTransition({
 
   const oldDimensions = getTextDimensions(prevCode.code);
   const newDimensions = getTextDimensions(code.code);
-  const interpolatedDimensions = {
-    width: interpolate(
-      progress(0),
-      [0, 1],
-      [oldDimensions.width, newDimensions.width],
-    ),
-    height: interpolate(
-      progress(0),
-      [0, 1],
-      [oldDimensions.height, newDimensions.height],
-    ),
-  };
-  const paddingX = (width - interpolatedDimensions.width) / 3;
-  const paddingY = (height - interpolatedDimensions.height) / 2;
+  const interpolatedHeight = interpolate(
+    progress(0),
+    [0, 1],
+    [oldDimensions.height, newDimensions.height],
+  );
+  const paddingY = (height - interpolatedHeight) / 2 - TOP_EXPLAINER_HEIGHT / 2;
 
   const style: React.CSSProperties = useMemo(() => {
     return {
@@ -108,8 +102,11 @@ export function CodeTransition({
   }, []);
 
   return (
-    <div style={{ flex: 1, paddingTop: paddingY, paddingLeft: paddingX }}>
-      <Pre ref={ref} code={code} handlers={handlers} style={style} />
-    </div>
+    <AbsoluteFill>
+      <TopExplainer />
+      <div style={{ flex: 1, paddingTop: paddingY, paddingLeft: PADDDING_X }}>
+        <Pre ref={ref} code={code} handlers={handlers} style={style} />
+      </div>
+    </AbsoluteFill>
   );
 }

@@ -58,7 +58,10 @@ export const Main: React.FC<Props> = ({ steps, themeColors }) => {
                   durationInFrames={stepDuration}
                   name={step.meta}
                 >
-                  <CodeTransition oldCode={steps[index - 1]} newCode={step} />
+                  <CodeTransition
+                    previousCode={steps[index - 1]}
+                    currentCode={step}
+                  />
                 </Series.Sequence>
               ))}
             </Series>
