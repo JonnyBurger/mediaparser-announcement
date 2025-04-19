@@ -1,4 +1,4 @@
-import { AbsoluteFill, Series, useVideoConfig } from "remotion";
+import { AbsoluteFill, Sequence, Series, useVideoConfig } from "remotion";
 import { ProgressBar } from "./ProgressBar";
 import { CodeTransition } from "./CodeTransition";
 import { HighlightedCode } from "codehike/code";
@@ -26,29 +26,36 @@ export const Main: React.FC<Props> = ({ steps, themeColors, codeWidth }) => {
     throw new Error("Theme colors are not defined");
   }
 
-  const outerStyle: React.CSSProperties = useMemo(() => {
-    return {
-      backgroundColor: themeColors.background,
-    };
-  }, [themeColors]);
-
   const style: React.CSSProperties = useMemo(() => {
     return {
       padding: `${verticalPadding}px 0px`,
+      backgroundColor: themeColors.background,
+      position: "relative",
+      borderRadius: 19,
+      border: "5px solid black",
+      borderBottom: "10px solid black",
     };
-  }, []);
+  }, [themeColors.background]);
 
   return (
     <ThemeProvider themeColors={themeColors}>
-      <AbsoluteFill style={outerStyle}>
-        <AbsoluteFill
-          style={{
-            width: codeWidth || "100%",
-            margin: "auto",
-          }}
-        >
-          <ProgressBar steps={steps} />
-          <AbsoluteFill style={style}>
+      <AbsoluteFill
+        style={{
+          flexDirection: "row",
+          display: "flex",
+          flex: 1,
+          justifyContent: "flex-end",
+          padding: 18,
+        }}
+      >
+        <Sequence width={1044} height={1044} style={style}>
+          <AbsoluteFill
+            style={{
+              width: "100%",
+              height: "100%",
+              margin: "auto",
+            }}
+          >
             <Series>
               {steps.map((step, index) => (
                 <Series.Sequence
@@ -66,7 +73,7 @@ export const Main: React.FC<Props> = ({ steps, themeColors, codeWidth }) => {
               ))}
             </Series>
           </AbsoluteFill>
-        </AbsoluteFill>
+        </Sequence>
       </AbsoluteFill>
       <RefreshOnCodeChange />
     </ThemeProvider>

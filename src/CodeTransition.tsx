@@ -1,4 +1,4 @@
-import { Easing, interpolate } from "remotion";
+import { Easing, interpolate, useVideoConfig } from "remotion";
 import { continueRender, delayRender, useCurrentFrame } from "remotion";
 import { Pre, HighlightedCode, AnnotationHandler } from "codehike/code";
 import React, { useEffect, useLayoutEffect, useMemo, useState } from "react";
@@ -13,7 +13,8 @@ import { callout } from "./annotations/Callout";
 
 import { tokenTransitions } from "./annotations/InlineToken";
 import { errorInline, errorMessage } from "./annotations/Error";
-import { fontFamily, fontSize, tabSize } from "./font";
+import { fontFamily, fontSize, lineHeight, tabSize } from "./font";
+import { getTextDimensions } from "./calculate-metadata/get-text-dimensions";
 
 export function CodeTransition({
   oldCode,
@@ -25,6 +26,7 @@ export function CodeTransition({
   readonly durationInFrames?: number;
 }) {
   const frame = useCurrentFrame();
+  const { width, height } = useVideoConfig();
 
   const ref = React.useRef<HTMLPreElement>(null);
   const [oldSnapshot, setOldSnapshot] =
@@ -82,15 +84,25 @@ export function CodeTransition({
     return [tokenTransitions, callout, errorInline, errorMessage];
   }, []);
 
+  const dimensions = getTextDimensions(code.code);
+  const paddingX = (width - dimensions.width) / 4;
+  const paddingY = (height - dimensions.height) / 2;
+
   const style: React.CSSProperties = useMemo(() => {
     return {
       position: "relative",
       fontSize,
-      lineHeight: 1.5,
+      lineHeight,
       fontFamily,
       tabSize,
+      marginTop: 0,
+      marginBottom: 0,
     };
   }, []);
 
-  return <Pre ref={ref} code={code} handlers={handlers} style={style} />;
+  return (
+    <div style={{ flex: 1, paddingTop: paddingY, paddingLeft: paddingX }}>
+      <Pre ref={ref} code={code} handlers={handlers} style={style} />
+    </div>
+  );
 }
