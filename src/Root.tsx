@@ -13,7 +13,6 @@ export const RemotionRoot = () => {
         steps: null,
         themeColors: null,
         theme: "github-dark" as const,
-        codeWidth: null,
         width: {
           type: "fixed",
           value: 1920,

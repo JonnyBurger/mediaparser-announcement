@@ -17,8 +17,6 @@ export const getTextDimensions = (contents: string) => {
       .flat(),
   );
 
-  console.log(lines);
-
   const codeWidth = widthPerCharacter * maxCharacters;
   return { width: codeWidth, height: lines.length * fontSize * lineHeight };
 };

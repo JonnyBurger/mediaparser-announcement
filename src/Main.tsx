@@ -1,5 +1,4 @@
 import { AbsoluteFill, Sequence, Series, useVideoConfig } from "remotion";
-import { ProgressBar } from "./ProgressBar";
 import { CodeTransition } from "./CodeTransition";
 import { HighlightedCode } from "codehike/code";
 import { ThemeColors, ThemeProvider } from "./calculate-metadata/theme";
@@ -10,17 +9,15 @@ import { verticalPadding } from "./font";
 export type Props = {
   steps: HighlightedCode[] | null;
   themeColors: ThemeColors | null;
-  codeWidth: number | null;
 };
 
-export const Main: React.FC<Props> = ({ steps, themeColors, codeWidth }) => {
+export const Main: React.FC<Props> = ({ steps, themeColors }) => {
   if (!steps) {
     throw new Error("Steps are not defined");
   }
 
   const { durationInFrames } = useVideoConfig();
   const stepDuration = durationInFrames / steps.length;
-  const transitionDuration = 30;
 
   if (!themeColors) {
     throw new Error("Theme colors are not defined");
@@ -31,9 +28,7 @@ export const Main: React.FC<Props> = ({ steps, themeColors, codeWidth }) => {
       padding: `${verticalPadding}px 0px`,
       backgroundColor: themeColors.background,
       position: "relative",
-      borderRadius: 19,
-      border: "5px solid black",
-      borderBottom: "10px solid black",
+      borderLeft: "2px solid rgba(255, 255, 255, 0.1)",
     };
   }, [themeColors.background]);
 
@@ -45,10 +40,9 @@ export const Main: React.FC<Props> = ({ steps, themeColors, codeWidth }) => {
           display: "flex",
           flex: 1,
           justifyContent: "flex-end",
-          padding: 18,
         }}
       >
-        <Sequence width={1044} height={1044} style={style}>
+        <Sequence width={1044} height={1080} style={style}>
           <AbsoluteFill
             style={{
               width: "100%",
@@ -64,11 +58,7 @@ export const Main: React.FC<Props> = ({ steps, themeColors, codeWidth }) => {
                   durationInFrames={stepDuration}
                   name={step.meta}
                 >
-                  <CodeTransition
-                    oldCode={steps[index - 1]}
-                    newCode={step}
-                    durationInFrames={transitionDuration}
-                  />
+                  <CodeTransition oldCode={steps[index - 1]} newCode={step} />
                 </Series.Sequence>
               ))}
             </Series>

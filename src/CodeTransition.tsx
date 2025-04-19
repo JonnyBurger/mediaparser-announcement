@@ -1,4 +1,4 @@
-import { Easing, interpolate, useVideoConfig } from "remotion";
+import { interpolate, spring, useVideoConfig } from "remotion";
 import { continueRender, delayRender, useCurrentFrame } from "remotion";
 import { Pre, HighlightedCode, AnnotationHandler } from "codehike/code";
 import React, { useEffect, useLayoutEffect, useMemo, useState } from "react";
@@ -19,14 +19,12 @@ import { getTextDimensions } from "./calculate-metadata/get-text-dimensions";
 export function CodeTransition({
   oldCode,
   newCode,
-  durationInFrames = 30,
 }: {
   readonly oldCode: HighlightedCode | null;
   readonly newCode: HighlightedCode;
-  readonly durationInFrames?: number;
 }) {
   const frame = useCurrentFrame();
-  const { width, height } = useVideoConfig();
+  const { width, height, fps } = useVideoConfig();
 
   const ref = React.useRef<HTMLPreElement>(null);
   const [oldSnapshot, setOldSnapshot] =
@@ -41,6 +39,17 @@ export function CodeTransition({
     return oldSnapshot ? newCode : prevCode;
   }, [newCode, prevCode, oldSnapshot]);
 
+  const progress = (delay: number) =>
+    spring({
+      frame,
+      fps,
+      config: {
+        damping: 200,
+      },
+      durationInFrames: 20,
+      delay: delay,
+    });
+
   useEffect(() => {
     if (!oldSnapshot) {
       setOldSnapshot(getStartingSnapshot(ref.current!));
@@ -54,27 +63,12 @@ export function CodeTransition({
       return;
     }
     const transitions = calculateTransitions(ref.current!, oldSnapshot);
-    transitions.forEach(({ element, keyframes, options }) => {
-      const delay = durationInFrames * options.delay;
-      const duration = durationInFrames * options.duration;
-      const linearProgress = interpolate(
-        frame,
-        [delay, delay + duration],
-        [0, 1],
-        {
-          extrapolateLeft: "clamp",
-          extrapolateRight: "clamp",
-        },
-      );
-      const progress = interpolate(linearProgress, [0, 1], [0, 1], {
-        easing: Easing.bezier(0.17, 0.67, 0.76, 0.91),
-      });
 
+    transitions.forEach(({ element, keyframes, options }) => {
       applyStyle({
         element,
         keyframes,
-        progress,
-        linearProgress,
+        progress: progress(options.fill === "both" ? 10 : 0),
       });
     });
     continueRender(handle);
@@ -84,9 +78,22 @@ export function CodeTransition({
     return [tokenTransitions, callout, errorInline, errorMessage];
   }, []);
 
-  const dimensions = getTextDimensions(code.code);
-  const paddingX = (width - dimensions.width) / 4;
-  const paddingY = (height - dimensions.height) / 2;
+  const oldDimensions = getTextDimensions(prevCode.code);
+  const newDimensions = getTextDimensions(code.code);
+  const interpolatedDimensions = {
+    width: interpolate(
+      progress(0),
+      [0, 1],
+      [oldDimensions.width, newDimensions.width],
+    ),
+    height: interpolate(
+      progress(0),
+      [0, 1],
+      [oldDimensions.height, newDimensions.height],
+    ),
+  };
+  const paddingX = (width - interpolatedDimensions.width) / 3;
+  const paddingY = (height - interpolatedDimensions.height) / 2;
 
   const style: React.CSSProperties = useMemo(() => {
     return {
