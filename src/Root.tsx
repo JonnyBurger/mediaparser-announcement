@@ -8,6 +8,7 @@ import { Grid } from "./Grid/Grid";
 import { HEIGHT } from "./Grid/layout";
 import { ThreeDGrid } from "./3DGrid/ThreeDGrid";
 import { AudioVis, AudioVisTrack } from "./Waveform/AudioVis";
+import { MediaParserSign } from "./MediaParserSign/MediaParserSign";
 
 export const RemotionRoot = () => {
   return (
@@ -48,6 +49,14 @@ export const RemotionRoot = () => {
       <Composition
         id="Waveform"
         component={AudioVis}
+        fps={30}
+        height={1080}
+        durationInFrames={500}
+        width={1920}
+      />
+      <Composition
+        id="MediaParserSign"
+        component={MediaParserSign}
         fps={30}
         height={1080}
         durationInFrames={500}
