@@ -24,11 +24,11 @@ export const Num: React.FC<{
     config: {
       damping: 200,
     },
-    delay: i * 2 + 40,
+    delay: i * 2 + 25,
   });
 
-  const borderRadius = interpolate(slide, [0, 1], [0, numWidth / 2]);
-  const textOpacity = interpolate(slide, [0, 0.5], [1, 0]);
+  const borderRadius = interpolate(slide, [0, 0.5], [0, numWidth / 2]);
+  const textOpacity = interpolate(slide, [0, 0.3], [1, 0]);
 
   const scale = interpolate(slide, [0, 1], [1, 0.1]);
 

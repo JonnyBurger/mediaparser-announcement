@@ -7,7 +7,7 @@ import { schema } from "./calculate-metadata/schema";
 import { Grid } from "./Grid/Grid";
 import { HEIGHT } from "./Grid/layout";
 import { ThreeDGrid } from "./3DGrid/ThreeDGrid";
-import { Waveform } from "./Waveform/Waveform";
+import { AudioVis, AudioVisTrack } from "./Waveform/AudioVis";
 
 export const RemotionRoot = () => {
   return (
@@ -47,10 +47,10 @@ export const RemotionRoot = () => {
       />
       <Composition
         id="Waveform"
-        component={Waveform}
+        component={AudioVis}
         fps={30}
         height={1080}
-        durationInFrames={200}
+        durationInFrames={500}
         width={1920}
       />
     </>
