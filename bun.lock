@@ -5,6 +5,7 @@
       "name": "mediaparser-announcement",
       "dependencies": {
         "@code-hike/lighter": "0.9.4",
+        "@remotion/animation-utils": "4.0.289",
         "@remotion/cli": "4.0.289",
         "@remotion/google-fonts": "4.0.289",
         "@remotion/layout-utils": "4.0.289",
@@ -222,6 +223,8 @@
     "@nodelib/fs.walk": ["@nodelib/fs.walk@1.2.8", "", { "dependencies": { "@nodelib/fs.scandir": "2.1.5", "fastq": "^1.6.0" } }, "sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg=="],
 
     "@pkgjs/parseargs": ["@pkgjs/parseargs@0.11.0", "", {}, "sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg=="],
+
+    "@remotion/animation-utils": ["@remotion/animation-utils@4.0.289", "", { "dependencies": { "remotion": "4.0.289" }, "peerDependencies": { "react": ">=16.8.0", "react-dom": ">=16.8.0" } }, "sha512-o+ZWCCjyoxlSf6j4sdKBCNCwF2xbivXzHGghy4vyWNqE4C3LkZw41UKpxENaeSUvKsdk1NERRZEuyiq66BpRmA=="],
 
     "@remotion/bundler": ["@remotion/bundler@4.0.288", "", { "dependencies": { "@remotion/studio": "4.0.288", "@remotion/studio-shared": "4.0.288", "css-loader": "5.2.7", "esbuild": "0.25.0", "react-refresh": "0.9.0", "remotion": "4.0.288", "source-map": "0.7.3", "style-loader": "4.0.0", "webpack": "5.96.1" }, "peerDependencies": { "react": ">=16.8.0", "react-dom": ">=16.8.0" } }, "sha512-aVSJONXg08uv0uUu6TIj6OPGfQu6/mIY6Fq8TIvGAb0mVKPiog2GtlbfwrDcrFgRvBByMc5P0zUpGeBySkocxw=="],
 

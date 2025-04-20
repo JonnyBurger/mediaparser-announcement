@@ -36,10 +36,20 @@ export const Grid = () => {
       </Sequence>
       <Sequence from={60}>
         <Flash
+          background="#8e44ad"
           content="10802160234902349"
           width={4}
           offset={144 - 16}
           label="H.264 sample"
+        />
+      </Sequence>
+      <Sequence from={64}>
+        <Flash
+          background="rgb(16 171 58)"
+          content="1080216023490"
+          width={4}
+          offset={144 - 16 + 5}
+          label="AAC sample"
         />
       </Sequence>
     </AbsoluteFill>

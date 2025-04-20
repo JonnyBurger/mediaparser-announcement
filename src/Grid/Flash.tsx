@@ -9,13 +9,15 @@ import {
 import { COLUMNS, HEIGHT, ROWS, WIDTH } from "./layout";
 import { HexCharacter } from "./HexCharacter";
 import { FlashLabel } from "./FlashLabel";
+import { makeTransform, translateZ } from "@remotion/animation-utils";
 
 export const Flash: React.FC<{
   content: string;
   offset: number;
   label: string;
   width: number;
-}> = ({ content, offset, label, width }) => {
+  background?: string;
+}> = ({ content, offset, label, width, background = "#0B84F3" }) => {
   const column = offset % COLUMNS;
   const row = Math.floor(offset / COLUMNS);
   const { fps } = useVideoConfig();
@@ -49,7 +51,7 @@ export const Flash: React.FC<{
         <FlashLabel progress={flash(10)} content={label} tileWidth={width} />
         <div
           style={{
-            filter: "drop-shadow(0 0 20px #0B84F3)",
+            filter: `drop-shadow(0 0 20px ${background})`,
           }}
         >
           {new Array(content.length).fill(true).map((_, i) => {
@@ -57,7 +59,7 @@ export const Flash: React.FC<{
             const column = i % width;
             return (
               <HexCharacter
-                backgroundColor="#0B84F3"
+                backgroundColor={background}
                 color="white"
                 column={column}
                 row={row}

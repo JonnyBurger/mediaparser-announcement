@@ -6,6 +6,7 @@ import { calculateMetadata } from "./calculate-metadata/calculate-metadata";
 import { schema } from "./calculate-metadata/schema";
 import { Grid } from "./Grid/Grid";
 import { HEIGHT } from "./Grid/layout";
+import { ThreeDGrid } from "./3DGrid/ThreeDGrid";
 
 export const RemotionRoot = () => {
   return (
@@ -32,6 +33,14 @@ export const RemotionRoot = () => {
         component={Grid}
         fps={30}
         height={HEIGHT}
+        durationInFrames={200}
+        width={1920}
+      />
+      <Composition
+        id="ThreeDGrid"
+        component={ThreeDGrid}
+        fps={30}
+        height={1080}
         durationInFrames={200}
         width={1920}
       />
