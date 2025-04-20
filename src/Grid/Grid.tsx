@@ -1,7 +1,7 @@
-import { AbsoluteFill, random, useVideoConfig } from "remotion";
-
-const columns = 16;
-const rows = 9;
+import { AbsoluteFill, random, Sequence } from "remotion";
+import { Flash } from "./Flash";
+import { COLUMNS, ROWS } from "./layout";
+import { HexCharacter } from "./HexCharacter";
 
 const randomHex = (seed: number) => {
   return Math.floor(random(seed) * 16777215)
@@ -11,36 +11,37 @@ const randomHex = (seed: number) => {
 };
 
 export const Grid = () => {
-  const { width, height } = useVideoConfig();
-
   return (
     <AbsoluteFill className="bg-white">
       <div className="grid grid-cols-16 grid-rows-9">
-        {Array.from({ length: columns * rows }).map((_, index) => {
-          const column = index % columns;
-          const row = Math.floor(index / columns);
+        {Array.from({ length: COLUMNS * ROWS }).map((_, index) => {
+          const column = index % COLUMNS;
+          const row = Math.floor(index / COLUMNS);
+
           return (
-            <div
-              key={index}
-              style={{
-                position: "absolute",
-                left: (column * width) / columns,
-                top: (row * height) / rows,
-                width: width / columns,
-                height: height / rows,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                fontSize: 60,
-                fontFamily: "GT Planar",
-                fontFeatureSettings: "'ss03' on",
-              }}
-            >
+            <HexCharacter column={column} row={row} color="black">
               {randomHex(index)}
-            </div>
+            </HexCharacter>
           );
         })}
       </div>
+      <Sequence from={30}>
+        <Flash content="1920" width={4} offset={41} label="width" />
+      </Sequence>
+      <Sequence from={45}>
+        <Flash content="1080" width={4} offset={66} label="height" />
+      </Sequence>
+      <Sequence from={55}>
+        <Flash content="30" width={2} offset={90} label="fps" />
+      </Sequence>
+      <Sequence from={60}>
+        <Flash
+          content="10802160234902349"
+          width={4}
+          offset={144 - 16}
+          label="H.264 sample"
+        />
+      </Sequence>
     </AbsoluteFill>
   );
 };

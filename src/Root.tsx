@@ -5,6 +5,7 @@ import "./index.css";
 import { calculateMetadata } from "./calculate-metadata/calculate-metadata";
 import { schema } from "./calculate-metadata/schema";
 import { Grid } from "./Grid/Grid";
+import { HEIGHT } from "./Grid/layout";
 
 export const RemotionRoot = () => {
   return (
@@ -30,7 +31,7 @@ export const RemotionRoot = () => {
         id="Grid"
         component={Grid}
         fps={30}
-        height={1080}
+        height={HEIGHT}
         durationInFrames={200}
         width={1920}
       />
