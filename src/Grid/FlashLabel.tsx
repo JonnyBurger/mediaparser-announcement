@@ -10,7 +10,7 @@ export const FlashLabel: React.FC<{
   const maskImage = `linear-gradient(to right, white ${gradientOffset + 20}%, transparent ${gradientOffset + 50}%)`;
   const frame = useCurrentFrame();
 
-  const appear = interpolate(frame, [24, 30], [0, 1]);
+  const appear = interpolate(frame, [20, 26], [0, 1]);
 
   return (
     <div

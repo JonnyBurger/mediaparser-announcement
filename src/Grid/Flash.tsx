@@ -9,7 +9,6 @@ import {
 import { COLUMNS, HEIGHT, ROWS, WIDTH } from "./layout";
 import { HexCharacter } from "./HexCharacter";
 import { FlashLabel } from "./FlashLabel";
-import { makeTransform, translateZ } from "@remotion/animation-utils";
 
 export const Flash: React.FC<{
   content: string;

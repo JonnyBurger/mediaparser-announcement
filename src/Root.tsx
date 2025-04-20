@@ -7,6 +7,7 @@ import { schema } from "./calculate-metadata/schema";
 import { Grid } from "./Grid/Grid";
 import { HEIGHT } from "./Grid/layout";
 import { ThreeDGrid } from "./3DGrid/ThreeDGrid";
+import { Waveform } from "./Waveform/Waveform";
 
 export const RemotionRoot = () => {
   return (
@@ -39,6 +40,14 @@ export const RemotionRoot = () => {
       <Composition
         id="ThreeDGrid"
         component={ThreeDGrid}
+        fps={30}
+        height={1080}
+        durationInFrames={200}
+        width={1920}
+      />
+      <Composition
+        id="Waveform"
+        component={Waveform}
         fps={30}
         height={1080}
         durationInFrames={200}
