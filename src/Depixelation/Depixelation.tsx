@@ -1,4 +1,4 @@
-import { makeTransform, rotateX } from "@remotion/animation-utils";
+import { makeTransform, scale } from "@remotion/animation-utils";
 import React, { useEffect, useMemo, useState } from "react";
 import {
   AbsoluteFill,
@@ -14,6 +14,36 @@ import {
 } from "remotion";
 import { loadImageAsBitmap } from "./load-image-as-bitmap";
 import { getAveragePixel } from "./get-average-pixel";
+import { CanvasPix } from "./CanvasPix";
+
+const LEVELS = 6;
+
+const TileOrImage: React.FC<{
+  padding: number;
+  imageData: ImageData;
+  absoluteLeft: number;
+  absoluteTop: number;
+  level: number;
+}> = ({ padding, imageData, absoluteLeft, absoluteTop, level }) => {
+  if (level < LEVELS) {
+    return (
+      <Tile
+        padding={padding}
+        imageData={imageData}
+        absoluteLeft={absoluteLeft}
+        absoluteTop={absoluteTop}
+      />
+    );
+  }
+
+  return (
+    <CanvasPix
+      imageData={imageData}
+      absoluteLeft={absoluteLeft}
+      absoluteTop={absoluteTop}
+    />
+  );
+};
 
 const Tile: React.FC<{
   padding: number;
@@ -30,7 +60,7 @@ const Tile: React.FC<{
       width,
       height,
     });
-  }, [absoluteLeft, absoluteTop, height, width]);
+  }, [absoluteLeft, absoluteTop, height, imageData, width]);
 
   return (
     <div
@@ -66,23 +96,36 @@ const Division: React.FC<{
   const { width, height } = useVideoConfig();
 
   const frontSide = (
-    <Tile
+    <TileOrImage
       padding={padding}
       imageData={imageData}
       absoluteLeft={absoluteLeft}
       absoluteTop={absoluteTop}
+      level={level}
     />
   );
 
-  const transform = (backSide: boolean, startFromProgress: number) =>
+  const transform = (startFromProgress: number) =>
     makeTransform([
-      rotateX(
-        interpolate(divisionsLeft, [startFromProgress, 1], [0, 180], {
+      scale(
+        interpolate(divisionsLeft, [startFromProgress, 1], [1.1, 1], {
           extrapolateLeft: "clamp",
           extrapolateRight: "clamp",
-        }) + (backSide ? 180 : 0),
+        }),
       ),
     ]);
+
+  if (divisionsLeft <= 0) {
+    return (
+      <TileOrImage
+        padding={padding}
+        imageData={imageData}
+        absoluteLeft={absoluteLeft}
+        absoluteTop={absoluteTop}
+        level={level}
+      />
+    );
+  }
 
   const backSide =
     divisionsLeft > 0
@@ -98,7 +141,7 @@ const Division: React.FC<{
               style={{
                 left,
                 top,
-                transform: transform(true, (i / 4) * 0.5),
+                transform: transform(0),
                 backfaceVisibility: "hidden",
                 padding: padding, // Add padding to create gap between subdivisions
               }}
@@ -116,28 +159,8 @@ const Division: React.FC<{
         })
       : null;
 
-  if (divisionsLeft <= 0) {
-    return (
-      <Tile
-        padding={padding}
-        imageData={imageData}
-        absoluteLeft={absoluteLeft}
-        absoluteTop={absoluteTop}
-      />
-    );
-  }
-
   return (
-    <AbsoluteFill
-      style={{
-        perspective: 20000,
-      }}
-    >
-      <AbsoluteFill
-        style={{ transform: transform(false, 0), backfaceVisibility: "hidden" }}
-      >
-        {frontSide}
-      </AbsoluteFill>
+    <AbsoluteFill>
       <AbsoluteFill>{backSide}</AbsoluteFill>
     </AbsoluteFill>
   );
@@ -163,7 +186,7 @@ export const Depixelation: React.FC = () => {
       });
   }, [handle, imageSrc]);
 
-  const divisions = new Array(5)
+  const divisions = new Array(LEVELS)
     .fill(true)
     .map((_, i) => {
       return spring({
@@ -172,7 +195,8 @@ export const Depixelation: React.FC = () => {
         config: {
           damping: 200,
         },
-        delay: i * 30,
+        durationInFrames: 20,
+        delay: i * 20,
       });
     })
     .reduce((acc, curr) => acc + curr, 0);
@@ -182,13 +206,13 @@ export const Depixelation: React.FC = () => {
   }
 
   return (
-    <AbsoluteFill className="flex flex-col text-white">
+    <AbsoluteFill className="flex flex-col text-white bg-white">
       <Division
         divisionsLeft={divisions}
         level={0}
         absoluteLeft={0}
         absoluteTop={0}
-        padding={1}
+        padding={Math.max(8 - divisions * 2, 0)}
         imageData={imageData}
       />
     </AbsoluteFill>

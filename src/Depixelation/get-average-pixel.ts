@@ -52,12 +52,16 @@ export const getAveragePixel = ({
   }
 
   for (let i = 0; i < total; i++) {
-    const row = Math.round(Math.floor(i / width) + top);
-    const column = Math.round((i % width) + left);
+    const row = Math.floor(i / width + top);
+    const column = Math.floor((i % width) + left);
     const index = row * imageData.width + column;
 
     if (!Number.isInteger(index)) {
       throw new Error(`Index is not an integer: ${index}`);
+    }
+
+    if (index * 4 > data.length) {
+      throw new Error("too big:" + index);
     }
 
     pixels.red.push(data[index * 4]);
@@ -73,7 +77,6 @@ export const getAveragePixel = ({
     alpha: pixels.alpha.reduce((acc, curr) => acc + curr, 0) / total,
   };
 
-  console.log(k, average);
   cache.set(k, average);
 
   return average;
