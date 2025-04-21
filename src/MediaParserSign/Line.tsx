@@ -25,7 +25,7 @@ const Char: React.FC<{
       config: {
         damping: 200,
       },
-      delay: delay + 10,
+      delay: delay + 5,
       durationInFrames: 15,
     });
 

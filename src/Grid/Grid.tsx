@@ -25,13 +25,13 @@ export const Grid = () => {
           );
         })}
       </div>
-      <Sequence from={30}>
+      <Sequence from={3}>
         <Flash content="1920" width={4} offset={41} label="width" />
       </Sequence>
-      <Sequence from={45}>
+      <Sequence from={30}>
         <Flash content="1080" width={4} offset={66} label="height" />
       </Sequence>
-      <Sequence from={55}>
+      <Sequence from={45}>
         <Flash content="30" width={2} offset={90} label="fps" />
       </Sequence>
       <Sequence from={60}>

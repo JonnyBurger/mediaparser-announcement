@@ -12,9 +12,7 @@ import { Waveform } from "./Waveform";
 import { waveform } from "./data";
 import {
   makeTransform,
-  rotateX,
   rotateY,
-  rotateZ,
   scale,
   translateX,
 } from "@remotion/animation-utils";
@@ -67,15 +65,6 @@ export const AudioVis: React.FC = () => {
     config: { damping: 200 },
     delay: 60,
     durationInFrames: 600,
-    durationRestThreshold: 0.00001,
-  });
-
-  const move = spring({
-    fps,
-    frame,
-    config: { damping: 200 },
-    durationInFrames: 600,
-    delay: 120,
     durationRestThreshold: 0.00001,
   });
 

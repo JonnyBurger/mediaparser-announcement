@@ -1,7 +1,9 @@
 import { AbsoluteFill } from "remotion";
 import { Line } from "./Line";
 
-export const MediaParserSign = () => {
+export const MediaParserSign: React.FC<{
+  lines: string[];
+}> = ({ lines }) => {
   return (
     <AbsoluteFill className="absolute flex justify-center items-center bg-white">
       <div
@@ -9,14 +11,9 @@ export const MediaParserSign = () => {
           scale: 1.5,
         }}
       >
-        <Line delay={0}>Understand media</Line>
-      </div>
-      <div
-        style={{
-          scale: 1.5,
-        }}
-      >
-        <Line delay={10}>deeper than ever</Line>
+        {lines.map((line, index) => (
+          <Line delay={index * 10}>{line}</Line>
+        ))}
       </div>
     </AbsoluteFill>
   );
