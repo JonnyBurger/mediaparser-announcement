@@ -85,7 +85,7 @@ export const Line: React.FC<{
     <div
       className="text-center"
       style={{
-        height: 100,
+        height: 60,
       }}
     >
       {children.split("").map((char, index) => {

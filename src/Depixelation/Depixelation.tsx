@@ -1,76 +1,131 @@
 import { makeTransform, rotateX } from "@remotion/animation-utils";
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   AbsoluteFill,
+  cancelRender,
+  continueRender,
+  delayRender,
   interpolate,
   Sequence,
   spring,
+  staticFile,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
+import { loadImageAsBitmap } from "./load-image-as-bitmap";
+import { getAveragePixel } from "./get-average-pixel";
 
 const Tile: React.FC<{
-  size: number;
-}> = ({ size }) => {
+  padding: number;
+  imageData: ImageData;
+  absoluteLeft: number;
+  absoluteTop: number;
+}> = ({ padding, imageData, absoluteLeft, absoluteTop }) => {
+  const { width, height } = useVideoConfig();
+  const averagePixel = useMemo(() => {
+    return getAveragePixel({
+      imageData,
+      top: absoluteTop,
+      left: absoluteLeft,
+      width,
+      height,
+    });
+  }, [absoluteLeft, absoluteTop, height, width]);
+
   return (
     <div
       style={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        fontSize: Math.min(80, size / 2),
         flex: 1,
-        backgroundColor: "white",
-        margin: 8, // Add consistent gap between tiles
+        color: "black",
+        margin: padding, // Add consistent gap between tiles
+        fontSize: 10,
+        backgroundColor: `rgba(${averagePixel.red}, ${averagePixel.green}, ${averagePixel.blue}, ${averagePixel.alpha})`,
       }}
-    >
-      Tile
-    </div>
+    ></div>
   );
 };
 
 const Division: React.FC<{
   divisionsLeft: number;
-}> = ({ divisionsLeft }) => {
+  level: number;
+  absoluteLeft: number;
+  absoluteTop: number;
+  padding: number;
+  imageData: ImageData;
+}> = ({
+  level,
+  divisionsLeft,
+  absoluteLeft,
+  absoluteTop,
+  padding,
+  imageData,
+}) => {
   const { width, height } = useVideoConfig();
 
-  const tileSize = Math.min(width, height) / Math.pow(2, divisionsLeft);
-  const frontSide = <Tile size={tileSize} />;
+  const frontSide = (
+    <Tile
+      padding={padding}
+      imageData={imageData}
+      absoluteLeft={absoluteLeft}
+      absoluteTop={absoluteTop}
+    />
+  );
+
+  const transform = (backSide: boolean, startFromProgress: number) =>
+    makeTransform([
+      rotateX(
+        interpolate(divisionsLeft, [startFromProgress, 1], [0, 180], {
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
+        }) + (backSide ? 180 : 0),
+      ),
+    ]);
 
   const backSide =
     divisionsLeft > 0
       ? new Array(4).fill(true).map((d, i) => {
           const left = i % 2 === 0 ? 0 : width / 2;
           const top = i < 2 ? 0 : height / 2;
+
           return (
             <Sequence
+              key={i}
               width={width / 2}
               height={height / 2}
               style={{
                 left,
                 top,
-                padding: 8, // Add padding to create gap between subdivisions
+                transform: transform(true, (i / 4) * 0.5),
+                backfaceVisibility: "hidden",
+                padding: padding, // Add padding to create gap between subdivisions
               }}
             >
-              <Division divisionsLeft={divisionsLeft - 1} />
+              <Division
+                divisionsLeft={divisionsLeft - 1}
+                level={level + 1}
+                absoluteLeft={absoluteLeft + left}
+                absoluteTop={absoluteTop + top}
+                padding={padding}
+                imageData={imageData}
+              />
             </Sequence>
           );
         })
       : null;
 
-  if (divisionsLeft === 0) {
-    return <Tile size={tileSize} />;
+  if (divisionsLeft <= 0) {
+    return (
+      <Tile
+        padding={padding}
+        imageData={imageData}
+        absoluteLeft={absoluteLeft}
+        absoluteTop={absoluteTop}
+      />
+    );
   }
-
-  const transform = (backSide: boolean) =>
-    makeTransform([
-      rotateX(
-        interpolate(divisionsLeft, [0, 1], [0, 180], {
-          extrapolateLeft: "clamp",
-          extrapolateRight: "clamp",
-        }) + (backSide ? 180 : 0),
-      ),
-    ]);
 
   return (
     <AbsoluteFill
@@ -79,15 +134,11 @@ const Division: React.FC<{
       }}
     >
       <AbsoluteFill
-        style={{ transform: transform(false), backfaceVisibility: "hidden" }}
+        style={{ transform: transform(false, 0), backfaceVisibility: "hidden" }}
       >
         {frontSide}
       </AbsoluteFill>
-      <AbsoluteFill
-        style={{ transform: transform(true), backfaceVisibility: "hidden" }}
-      >
-        {backSide}
-      </AbsoluteFill>
+      <AbsoluteFill>{backSide}</AbsoluteFill>
     </AbsoluteFill>
   );
 };
@@ -95,8 +146,24 @@ const Division: React.FC<{
 export const Depixelation: React.FC = () => {
   const { fps } = useVideoConfig();
   const frame = useCurrentFrame();
+  const [imageData, setImageData] = useState<ImageData | null>(null);
+  const [handle] = useState(() => delayRender());
 
-  const divisions = new Array(4)
+  const imageSrc = staticFile("image.png");
+
+  useEffect(() => {
+    loadImageAsBitmap(imageSrc)
+      .then((imageData) => {
+        setImageData(imageData);
+        continueRender(handle);
+      })
+      .catch((err) => {
+        console.error(err);
+        cancelRender(handle);
+      });
+  }, [handle, imageSrc]);
+
+  const divisions = new Array(5)
     .fill(true)
     .map((_, i) => {
       return spring({
@@ -110,9 +177,20 @@ export const Depixelation: React.FC = () => {
     })
     .reduce((acc, curr) => acc + curr, 0);
 
+  if (!imageData) {
+    return null;
+  }
+
   return (
     <AbsoluteFill className="flex flex-col text-white">
-      <Division divisionsLeft={divisions} />
+      <Division
+        divisionsLeft={divisions}
+        level={0}
+        absoluteLeft={0}
+        absoluteTop={0}
+        padding={1}
+        imageData={imageData}
+      />
     </AbsoluteFill>
   );
 };
