@@ -52,8 +52,11 @@ export const getAveragePixel = ({
   }
 
   for (let i = 0; i < total; i++) {
-    const row = Math.floor(i / width + top);
-    const column = Math.floor((i % width) + left);
+    const row = Math.min(imageData.height - 1, Math.floor(i / width + top));
+    const column = Math.min(
+      imageData.width - 1,
+      Math.floor((i % width) + left),
+    );
     const index = row * imageData.width + column;
 
     if (!Number.isInteger(index)) {
@@ -61,6 +64,16 @@ export const getAveragePixel = ({
     }
 
     if (index * 4 > data.length) {
+      console.log({
+        row,
+        column,
+        index: index * 4,
+        dataLength: data.length,
+        top,
+        left,
+        width,
+        height,
+      });
       throw new Error("too big:" + index);
     }
 

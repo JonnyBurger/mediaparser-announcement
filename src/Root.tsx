@@ -11,7 +11,8 @@ import { AudioVis } from "./Waveform/AudioVis";
 import { MediaParserSign } from "./MediaParserSign/MediaParserSign";
 import { OutTransition } from "./OutTransition";
 import { Master } from "./Master";
-import { Depixelation } from "./Depixelation/Depixelation";
+import { DepixelationSimple } from "./Depixelation/DepixelationSimple";
+import { LayeredPixelation } from "./Depixelation/LayeredPixelation";
 export const RemotionRoot = () => {
   return (
     <>
@@ -84,12 +85,30 @@ export const RemotionRoot = () => {
         width={1920}
       />
       <Composition
-        id="Depixelation"
-        component={Depixelation}
+        id="DepixelationSimple"
+        component={DepixelationSimple}
         fps={30}
         height={1080}
         durationInFrames={30 * 30}
         width={1920}
+        defaultProps={{
+          level: 5,
+          type: "tile",
+          durationInFrames: 15,
+          direction: "down",
+        }}
+      />
+      <Composition
+        id="LayeredPixelation"
+        component={LayeredPixelation}
+        fps={30}
+        height={1080}
+        durationInFrames={30 * 30}
+        width={1920}
+        defaultProps={{
+          level: 5,
+          type: "tile",
+        }}
       />
     </>
   );

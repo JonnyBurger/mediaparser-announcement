@@ -1,12 +1,18 @@
 import React, { useEffect, useRef } from "react";
-import { useVideoConfig } from "remotion";
 
 export const CanvasPix: React.FC<{
   imageData: ImageData;
   absoluteLeft: number;
   absoluteTop: number;
-}> = ({ imageData, absoluteLeft, absoluteTop }) => {
-  const { width, height } = useVideoConfig();
+  absoluteWidth: number;
+  absoluteHeight: number;
+}> = ({
+  imageData,
+  absoluteLeft,
+  absoluteTop,
+  absoluteWidth,
+  absoluteHeight,
+}) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -32,7 +38,13 @@ export const CanvasPix: React.FC<{
         );
       }
     }
-  }, [imageData, absoluteLeft, absoluteTop, width, height]);
+  }, [imageData, absoluteLeft, absoluteTop]);
 
-  return <canvas ref={canvasRef} width={width} height={height}></canvas>;
+  return (
+    <canvas
+      ref={canvasRef}
+      width={absoluteWidth}
+      height={absoluteHeight}
+    ></canvas>
+  );
 };
