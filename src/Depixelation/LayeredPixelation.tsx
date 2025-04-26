@@ -1,73 +1,86 @@
-import React from "react";
-import { AbsoluteFill, Sequence } from "remotion";
+import React, { useMemo } from "react";
+import {
+  AbsoluteFill,
+  Img,
+  interpolate,
+  spring,
+  staticFile,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
 import { DepixelationSimple } from "./DepixelationSimple";
 
 export const LayeredPixelation: React.FC = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const appear = spring({
+    fps,
+    frame,
+    config: {
+      damping: 200,
+    },
+    durationInFrames: 48,
+  });
+
+  const disappear = spring({
+    fps,
+    frame,
+    config: {
+      damping: 200,
+    },
+    delay: 120,
+    durationInFrames: 48,
+  });
+
+  const progress = interpolate(frame, [0, 150], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+
+  const actualFontSize = 14 * Math.E ** ((1 - progress * 1.4) * 3);
+  const fontSize = Math.min(actualFontSize);
+
+  const props = useMemo(() => {
+    if (fontSize > 14 * Math.E ** 2) {
+      return {
+        level: 2,
+      };
+    }
+
+    if (fontSize > 14 * Math.E) {
+      return {
+        level: 3,
+      };
+    }
+
+    if (fontSize > 14) {
+      return {
+        level: 4,
+      };
+    }
+
+    return {
+      level: 5,
+    };
+  }, [fontSize]);
+
   return (
     <AbsoluteFill>
-      <Sequence>
-        <DepixelationSimple
-          direction="down"
-          durationInFrames={25}
-          level={2}
-          type="tile"
-          withNumbers
-          fontStyles={{
-            fontSize: 140,
-            fontWeight: "bold",
-          }}
-        />
-      </Sequence>
-      <Sequence from={25}>
-        <DepixelationSimple
-          direction="up"
-          durationInFrames={25}
-          level={3}
-          type="tile"
-          withNumbers
-          fontStyles={{
-            fontSize: 80,
-            fontWeight: "bold",
-          }}
-        />
-      </Sequence>
-      <Sequence from={50}>
-        <DepixelationSimple
-          direction="down"
-          durationInFrames={25}
-          level={4}
-          type="tile"
-          withNumbers
-          fontStyles={{
-            fontSize: 60,
-            fontWeight: "bold",
-          }}
-        />
-      </Sequence>
-      <Sequence from={75}>
-        <DepixelationSimple
-          direction="up"
-          durationInFrames={25}
-          level={5}
-          type="tile"
-          withNumbers
-          fontStyles={{
-            fontSize: 20,
-          }}
-        />
-      </Sequence>
-      <Sequence from={100}>
-        <DepixelationSimple
-          direction="down"
-          durationInFrames={25}
-          level={5}
-          type="image"
-          withNumbers={false}
-          fontStyles={{
-            fontSize: 12,
-          }}
-        />
-      </Sequence>
+      <AbsoluteFill>
+        <Img src={staticFile("image.png")} style={{}}></Img>
+      </AbsoluteFill>
+      <DepixelationSimple
+        disappear={disappear}
+        appear={appear}
+        {...props}
+        type="tile"
+        withNumbers
+        fontStyles={{
+          fontSize: fontSize,
+          fontWeight: "bold",
+        }}
+      />
     </AbsoluteFill>
   );
 };

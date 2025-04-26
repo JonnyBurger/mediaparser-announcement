@@ -13,6 +13,7 @@ import { OutTransition } from "./OutTransition";
 import { Master } from "./Master";
 import { DepixelationSimple } from "./Depixelation/DepixelationSimple";
 import { LayeredPixelation } from "./Depixelation/LayeredPixelation";
+import { BigFontSize } from "./BigFontSize";
 export const RemotionRoot = () => {
   return (
     <>
@@ -94,13 +95,13 @@ export const RemotionRoot = () => {
         defaultProps={{
           level: 5,
           type: "tile",
-          durationInFrames: 15,
-          direction: "down",
           withNumbers: false,
           fontStyles: {
             fontSize: 50,
             fontFamily: "GT Planar",
           },
+          appear: 0,
+          disappear: 0,
         }}
       />
       <Composition
@@ -114,6 +115,14 @@ export const RemotionRoot = () => {
           level: 5,
           type: "tile",
         }}
+      />
+      <Composition
+        id="BigFontSize"
+        component={BigFontSize}
+        fps={30}
+        height={1080}
+        durationInFrames={30 * 30}
+        width={1920}
       />
     </>
   );

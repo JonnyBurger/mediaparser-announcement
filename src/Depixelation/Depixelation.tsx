@@ -2,6 +2,7 @@ import React, { useMemo } from "react";
 import { CanvasPix } from "./CanvasPix";
 import { getAveragePixel } from "./get-average-pixel";
 import { darken } from "polished";
+import { interpolateColors } from "remotion";
 
 export const TileOrImage: React.FC<{
   padding: number;
@@ -13,6 +14,8 @@ export const TileOrImage: React.FC<{
   type: "tile" | "image";
   withNumbers: boolean;
   fontStyles: React.CSSProperties;
+  appear: number;
+  disappear: number;
 }> = ({
   padding,
   imageData,
@@ -23,6 +26,8 @@ export const TileOrImage: React.FC<{
   absoluteHeight,
   withNumbers,
   fontStyles,
+  appear,
+  disappear,
 }) => {
   if (type === "tile") {
     return (
@@ -35,6 +40,8 @@ export const TileOrImage: React.FC<{
         absoluteHeight={absoluteHeight}
         withNumbers={withNumbers}
         fontStyles={fontStyles}
+        appear={appear}
+        disappear={disappear}
       />
     );
   }
@@ -59,6 +66,8 @@ const Tile: React.FC<{
   absoluteHeight: number;
   withNumbers: boolean;
   fontStyles: React.CSSProperties;
+  appear: number;
+  disappear: number;
 }> = ({
   padding,
   imageData,
@@ -68,6 +77,8 @@ const Tile: React.FC<{
   absoluteHeight,
   withNumbers,
   fontStyles,
+  appear,
+  disappear,
 }) => {
   const averagePixel = useMemo(() => {
     return getAveragePixel({
@@ -81,6 +92,12 @@ const Tile: React.FC<{
 
   const backgroundColor = `rgba(${Math.round(averagePixel.red)}, ${Math.round(averagePixel.green)}, ${Math.round(averagePixel.blue)}, ${averagePixel.alpha})`;
 
+  const color = interpolateColors(
+    appear,
+    [0, 1],
+    ["black", darken(0.3, backgroundColor)],
+  );
+
   return (
     <div
       style={{
@@ -88,12 +105,17 @@ const Tile: React.FC<{
         justifyContent: "center",
         alignItems: "center",
         flex: 1,
-        color: darken(0.3, backgroundColor),
-        margin: padding, // Add consistent gap between tiles
-        fontSize: 50,
+        color,
+        margin: padding,
         fontFamily: "GT Planar",
         fontFeatureSettings: "'ss03' on",
-        backgroundColor,
+        backgroundColor: interpolateColors(
+          appear,
+          [0, 1],
+          ["white", backgroundColor],
+        ),
+        lineHeight: 1,
+        opacity: 1 - disappear,
       }}
     >
       <span style={fontStyles}>

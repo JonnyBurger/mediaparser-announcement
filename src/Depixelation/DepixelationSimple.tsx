@@ -5,9 +5,7 @@ import {
   continueRender,
   delayRender,
   interpolate,
-  spring,
   staticFile,
-  useCurrentFrame,
   useVideoConfig,
 } from "remotion";
 import { TileOrImage } from "./Depixelation";
@@ -16,23 +14,15 @@ import { loadImageAsBitmap } from "./load-image-as-bitmap";
 export const DepixelationSimple: React.FC<{
   level: number;
   type: "tile" | "image";
-  durationInFrames: number;
-  direction: "down" | "up";
   withNumbers: boolean;
   fontStyles: React.CSSProperties;
-}> = ({
-  level,
-  type,
-  durationInFrames,
-  direction,
-  withNumbers,
-  fontStyles,
-}) => {
+  appear: number;
+  disappear: number;
+}> = ({ level, type, withNumbers, fontStyles, appear, disappear }) => {
   const tiles = 2 ** level;
   const { width, height } = useVideoConfig();
   const [handle] = useState(() => delayRender());
 
-  const frame = useCurrentFrame();
   const [imageData, setImageData] = useState<ImageData | null>(null);
   const imageSrc = staticFile("image.png");
 
@@ -52,27 +42,16 @@ export const DepixelationSimple: React.FC<{
     return null;
   }
 
-  const spr = spring({
-    frame,
-    fps: 30,
-    config: {
-      damping: 200,
-    },
-    durationInFrames: durationInFrames,
-    durationRestThreshold: 0.01,
-  });
-
-  const scale =
-    interpolate(spr, [0, 1], [1.2, 0.9]) -
-    interpolate(frame, [0, durationInFrames], [0, 0.2]);
-
   return (
     <AbsoluteFill>
       {new Array(tiles).fill(true).map((_, i) => {
         return (
           <AbsoluteFill key={i}>
             {new Array(tiles).fill(true).map((_, j) => {
-              const index = j * tiles + i;
+              const index = i * tiles + j;
+
+              const totalTiles = tiles * tiles;
+              const progress = index / totalTiles;
 
               const left = Math.round((width / tiles) * i);
               const top = Math.round((height / tiles) * j);
@@ -85,6 +64,8 @@ export const DepixelationSimple: React.FC<{
                   key={index}
                 >
                   <TileOrImage
+                    appear={interpolate(appear, [progress * 0.7, 1], [0, 1])}
+                    disappear={interpolate(disappear, [progress, 1], [0, 1])}
                     absoluteLeft={left}
                     absoluteTop={top}
                     absoluteWidth={w}
@@ -93,7 +74,7 @@ export const DepixelationSimple: React.FC<{
                     imageData={imageData}
                     type={type}
                     withNumbers={withNumbers}
-                    fontStyles={{ ...fontStyles, scale: scale }}
+                    fontStyles={{ ...fontStyles }}
                   />
                 </AbsoluteFill>
               );
