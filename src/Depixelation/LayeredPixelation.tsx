@@ -5,44 +5,67 @@ import { DepixelationSimple } from "./DepixelationSimple";
 export const LayeredPixelation: React.FC = () => {
   return (
     <AbsoluteFill>
-      <Sequence from={13}>
+      <Sequence>
         <DepixelationSimple
           direction="down"
-          durationInFrames={12}
+          durationInFrames={25}
           level={2}
           type="tile"
+          withNumbers
+          fontStyles={{
+            fontSize: 140,
+            fontWeight: "bold",
+          }}
         />
       </Sequence>
       <Sequence from={25}>
         <DepixelationSimple
           direction="up"
-          durationInFrames={16}
+          durationInFrames={25}
           level={3}
           type="tile"
+          withNumbers
+          fontStyles={{
+            fontSize: 80,
+            fontWeight: "bold",
+          }}
         />
       </Sequence>
-      <Sequence from={41}>
+      <Sequence from={50}>
         <DepixelationSimple
           direction="down"
-          durationInFrames={20}
+          durationInFrames={25}
           level={4}
           type="tile"
+          withNumbers
+          fontStyles={{
+            fontSize: 60,
+            fontWeight: "bold",
+          }}
         />
       </Sequence>
-      <Sequence from={61}>
+      <Sequence from={75}>
         <DepixelationSimple
           direction="up"
-          durationInFrames={24}
+          durationInFrames={25}
           level={5}
           type="tile"
+          withNumbers
+          fontStyles={{
+            fontSize: 20,
+          }}
         />
       </Sequence>
-      <Sequence from={85}>
+      <Sequence from={100}>
         <DepixelationSimple
           direction="down"
-          durationInFrames={28}
+          durationInFrames={25}
           level={5}
           type="image"
+          withNumbers={false}
+          fontStyles={{
+            fontSize: 12,
+          }}
         />
       </Sequence>
     </AbsoluteFill>

@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { CanvasPix } from "./CanvasPix";
 import { getAveragePixel } from "./get-average-pixel";
+import { darken } from "polished";
 
 export const TileOrImage: React.FC<{
   padding: number;
@@ -10,6 +11,8 @@ export const TileOrImage: React.FC<{
   absoluteWidth: number;
   absoluteHeight: number;
   type: "tile" | "image";
+  withNumbers: boolean;
+  fontStyles: React.CSSProperties;
 }> = ({
   padding,
   imageData,
@@ -18,6 +21,8 @@ export const TileOrImage: React.FC<{
   type,
   absoluteWidth,
   absoluteHeight,
+  withNumbers,
+  fontStyles,
 }) => {
   if (type === "tile") {
     return (
@@ -28,6 +33,8 @@ export const TileOrImage: React.FC<{
         absoluteTop={absoluteTop}
         absoluteWidth={absoluteWidth}
         absoluteHeight={absoluteHeight}
+        withNumbers={withNumbers}
+        fontStyles={fontStyles}
       />
     );
   }
@@ -50,6 +57,8 @@ const Tile: React.FC<{
   absoluteTop: number;
   absoluteWidth: number;
   absoluteHeight: number;
+  withNumbers: boolean;
+  fontStyles: React.CSSProperties;
 }> = ({
   padding,
   imageData,
@@ -57,6 +66,8 @@ const Tile: React.FC<{
   absoluteTop,
   absoluteWidth,
   absoluteHeight,
+  withNumbers,
+  fontStyles,
 }) => {
   const averagePixel = useMemo(() => {
     return getAveragePixel({
@@ -68,6 +79,8 @@ const Tile: React.FC<{
     });
   }, [absoluteLeft, absoluteTop, absoluteHeight, absoluteWidth, imageData]);
 
+  const backgroundColor = `rgba(${Math.round(averagePixel.red)}, ${Math.round(averagePixel.green)}, ${Math.round(averagePixel.blue)}, ${averagePixel.alpha})`;
+
   return (
     <div
       style={{
@@ -75,11 +88,23 @@ const Tile: React.FC<{
         justifyContent: "center",
         alignItems: "center",
         flex: 1,
-        color: "black",
+        color: darken(0.3, backgroundColor),
         margin: padding, // Add consistent gap between tiles
-        fontSize: 10,
-        backgroundColor: `rgba(${averagePixel.red}, ${averagePixel.green}, ${averagePixel.blue}, ${averagePixel.alpha})`,
+        fontSize: 50,
+        fontFamily: "GT Planar",
+        fontFeatureSettings: "'ss03' on",
+        backgroundColor,
       }}
-    ></div>
+    >
+      <span style={fontStyles}>
+        {withNumbers
+          ? Math.round(
+              (averagePixel.red + averagePixel.green + averagePixel.blue) / 3,
+            )
+              .toString(16)
+              .toUpperCase()
+          : null}
+      </span>
+    </div>
   );
 };

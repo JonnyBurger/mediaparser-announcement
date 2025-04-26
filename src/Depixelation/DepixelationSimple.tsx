@@ -18,7 +18,16 @@ export const DepixelationSimple: React.FC<{
   type: "tile" | "image";
   durationInFrames: number;
   direction: "down" | "up";
-}> = ({ level, type, durationInFrames, direction }) => {
+  withNumbers: boolean;
+  fontStyles: React.CSSProperties;
+}> = ({
+  level,
+  type,
+  durationInFrames,
+  direction,
+  withNumbers,
+  fontStyles,
+}) => {
   const tiles = 2 ** level;
   const { width, height } = useVideoConfig();
   const [handle] = useState(() => delayRender());
@@ -49,9 +58,13 @@ export const DepixelationSimple: React.FC<{
     config: {
       damping: 200,
     },
-    durationInFrames: durationInFrames * 1.5,
+    durationInFrames: durationInFrames,
     durationRestThreshold: 0.01,
   });
+
+  const scale =
+    interpolate(spr, [0, 1], [1.2, 0.9]) -
+    interpolate(frame, [0, durationInFrames], [0, 0.2]);
 
   return (
     <AbsoluteFill>
@@ -60,14 +73,7 @@ export const DepixelationSimple: React.FC<{
           <AbsoluteFill key={i}>
             {new Array(tiles).fill(true).map((_, j) => {
               const index = j * tiles + i;
-              const reverseIndex = tiles * tiles - index - 1;
-              const relativeTime =
-                (direction === "down" ? index : reverseIndex) / (tiles * tiles);
-              const scale = interpolate(
-                spr,
-                [relativeTime - 0.25, relativeTime],
-                [0, 1],
-              );
+
               const left = Math.round((width / tiles) * i);
               const top = Math.round((height / tiles) * j);
               const w = Math.round(width / tiles);
@@ -75,7 +81,7 @@ export const DepixelationSimple: React.FC<{
 
               return (
                 <AbsoluteFill
-                  style={{ left, top, width: w, height: h, opacity: scale }}
+                  style={{ left, top, width: w, height: h }}
                   key={index}
                 >
                   <TileOrImage
@@ -86,6 +92,8 @@ export const DepixelationSimple: React.FC<{
                     padding={0}
                     imageData={imageData}
                     type={type}
+                    withNumbers={withNumbers}
+                    fontStyles={{ ...fontStyles, scale: scale }}
                   />
                 </AbsoluteFill>
               );

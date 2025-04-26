@@ -96,6 +96,11 @@ export const RemotionRoot = () => {
           type: "tile",
           durationInFrames: 15,
           direction: "down",
+          withNumbers: false,
+          fontStyles: {
+            fontSize: 50,
+            fontFamily: "GT Planar",
+          },
         }}
       />
       <Composition
