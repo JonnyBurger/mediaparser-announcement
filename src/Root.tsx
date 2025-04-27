@@ -1,4 +1,4 @@
-import { Composition } from "remotion";
+import { Composition, staticFile } from "remotion";
 import { Main } from "./Main";
 import "./index.css";
 
@@ -14,6 +14,9 @@ import { Master } from "./Master";
 import { DepixelationSimple } from "./Depixelation/DepixelationSimple";
 import { LayeredPixelation } from "./Depixelation/LayeredPixelation";
 import { BigFontSize } from "./BigFontSize";
+import { ParseAndDownloadMedia } from "./ParseAndDownloadMedia";
+import { DecodeScene } from "./ParseAndDownloadMedia/DecodeScene";
+import { DecodeCloseUp } from "./ParseAndDownloadMedia/DecodeCloseUp";
 export const RemotionRoot = () => {
   return (
     <>
@@ -122,6 +125,33 @@ export const RemotionRoot = () => {
         fps={30}
         height={1080}
         durationInFrames={30 * 30}
+        width={1920}
+      />
+      <Composition
+        id="ParseAndDownloadMedia"
+        component={ParseAndDownloadMedia}
+        fps={30}
+        height={1080}
+        durationInFrames={30 * 30}
+        width={1920}
+      />
+      <Composition
+        id="DecodeScene"
+        component={DecodeScene}
+        fps={30}
+        height={1080}
+        durationInFrames={30 * 30}
+        width={1920}
+        defaultProps={{
+          src: staticFile("LayeredPixelation.mp4"),
+        }}
+      />
+      <Composition
+        id="DecodeCloseUp"
+        component={DecodeCloseUp}
+        fps={30}
+        height={1080}
+        durationInFrames={120}
         width={1920}
       />
     </>

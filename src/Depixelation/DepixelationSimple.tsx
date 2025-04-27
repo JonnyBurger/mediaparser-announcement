@@ -48,7 +48,7 @@ export const DepixelationSimple: React.FC<{
         return (
           <AbsoluteFill key={i}>
             {new Array(tiles).fill(true).map((_, j) => {
-              const index = i * tiles + j;
+              const index = i * tiles + (tiles - j - 1);
 
               const totalTiles = tiles * tiles;
               const progress = index / totalTiles;
@@ -65,7 +65,11 @@ export const DepixelationSimple: React.FC<{
                 >
                   <TileOrImage
                     appear={interpolate(appear, [progress * 0.7, 1], [0, 1])}
-                    disappear={interpolate(disappear, [progress, 1], [0, 1])}
+                    disappear={interpolate(
+                      disappear,
+                      [progress * 0.9, 1],
+                      [0, 1],
+                    )}
                     absoluteLeft={left}
                     absoluteTop={top}
                     absoluteWidth={w}

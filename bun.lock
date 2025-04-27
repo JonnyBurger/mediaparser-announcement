@@ -11,7 +11,9 @@
         "@remotion/layout-utils": "4.0.289",
         "@remotion/media-utils": "4.0.289",
         "@remotion/paths": "4.0.289",
+        "@remotion/shapes": "^4.0.290",
         "@remotion/studio": "4.0.289",
+        "@remotion/svg-3d-engine": "^4.0.290",
         "codehike": "1.0.4",
         "polished": "^4.3.1",
         "react": "19.0.0",
@@ -262,6 +264,8 @@
 
     "@remotion/renderer": ["@remotion/renderer@4.0.289", "", { "dependencies": { "@remotion/streaming": "4.0.289", "execa": "5.1.1", "extract-zip": "2.0.1", "remotion": "4.0.289", "source-map": "^0.8.0-beta.0", "ws": "8.17.1" }, "optionalDependencies": { "@remotion/compositor-darwin-arm64": "4.0.289", "@remotion/compositor-darwin-x64": "4.0.289", "@remotion/compositor-linux-arm64-gnu": "4.0.289", "@remotion/compositor-linux-arm64-musl": "4.0.289", "@remotion/compositor-linux-x64-gnu": "4.0.289", "@remotion/compositor-linux-x64-musl": "4.0.289", "@remotion/compositor-win32-x64-msvc": "4.0.289" }, "peerDependencies": { "react": ">=16.8.0", "react-dom": ">=16.8.0" } }, "sha512-z3jx+unhFdGH9hRYmzsb+PkKGX+qVVB1AR1y5vJoVWBd/Bj732zCfoeLSAwfGBjtnsMeonC3tIIv8T6dPm1HzA=="],
 
+    "@remotion/shapes": ["@remotion/shapes@4.0.290", "", { "dependencies": { "@remotion/paths": "4.0.290" }, "peerDependencies": { "react": ">=16.8.0", "react-dom": ">=16.8.0" } }, "sha512-6WFEmskwJ+e7DCQLjlLU+j2l3ztKgNRKoDlrbM8KZ8ir6ano8jcfmQbSo54g5kj/qm20SNeeDdMhzzlOFP4+yg=="],
+
     "@remotion/streaming": ["@remotion/streaming@4.0.289", "", {}, "sha512-1BFy/HZKJQOERGK+6Fqd6mNhDlUe3QZ1b5yX5D0knyslMh898gLQqR/7x7hTC7RelFJ7iAbRE8eZwLHMpDtaUw=="],
 
     "@remotion/studio": ["@remotion/studio@4.0.289", "", { "dependencies": { "@remotion/media-parser": "4.0.289", "@remotion/media-utils": "4.0.289", "@remotion/player": "4.0.289", "@remotion/renderer": "4.0.289", "@remotion/studio-shared": "4.0.289", "@remotion/zod-types": "4.0.289", "memfs": "3.4.3", "open": "^8.4.2", "remotion": "4.0.289", "semver": "7.5.3", "source-map": "0.7.3", "zod": "3.22.3" }, "peerDependencies": { "react": ">=16.8.0", "react-dom": ">=16.8.0" } }, "sha512-8sQzJkUjBtqgkHTCqYIA3eZcw9p9x68QLZLbKpYoUSMJf3hjnmbnYN6Z+j77JBmN0wTJvLupNxBdxYcMyI6dPA=="],
@@ -269,6 +273,8 @@
     "@remotion/studio-server": ["@remotion/studio-server@4.0.289", "", { "dependencies": { "@babel/parser": "7.24.1", "@remotion/bundler": "4.0.289", "@remotion/renderer": "4.0.289", "@remotion/studio-shared": "4.0.289", "memfs": "3.4.3", "open": "^8.4.2", "recast": "0.23.9", "remotion": "4.0.289", "semver": "7.5.3", "source-map": "0.7.3" } }, "sha512-wpmaw6rKd00Q5yDgCjcanXJHTc/1K0dvjWeHGDTjQLLS4lEH9W+N+hHSuWtNarLZTAxujDPqk6y/j3HhCvH5ow=="],
 
     "@remotion/studio-shared": ["@remotion/studio-shared@4.0.289", "", { "dependencies": { "remotion": "4.0.289" } }, "sha512-SwMkeX01Pb7BFDN2/qtchNd9dtjYtY1/zgzXjlAvU8x3SomhR5COoQQUPLZ9jQJv+iK8oHruGL/g9jKhMGqZkw=="],
+
+    "@remotion/svg-3d-engine": ["@remotion/svg-3d-engine@4.0.290", "", { "dependencies": { "@remotion/paths": "4.0.290" } }, "sha512-gpubRjnZ63PXZaXVz6prUN+yxl2/eWldY5dH1Kk9z40hKof07KJSF5GY/PEruNcoNF7CPhpR/eIlIeh1wdMQKw=="],
 
     "@remotion/tailwind": ["@remotion/tailwind@4.0.289", "", { "dependencies": { "autoprefixer": "10.4.20", "css-loader": "5.2.7", "postcss": "8.4.47", "postcss-loader": "^7.3.0", "postcss-preset-env": "^8.3.2", "style-loader": "4.0.0", "tailwindcss": "3.4.13" }, "peerDependencies": { "@remotion/bundler": "4.0.289" } }, "sha512-Q4zSEuVynvTLUVbEriw+2mZGEsuSqi3UvxwbaK1TJRR2oMQ5Pmi+lBXnFgf/sURgc7gR22vtc0e39m5rMIeeFw=="],
 
@@ -1156,7 +1162,11 @@
 
     "@remotion/renderer/source-map": ["source-map@0.8.0-beta.0", "", { "dependencies": { "whatwg-url": "^7.0.0" } }, "sha512-2ymg6oRBpebeZi9UUNsgQ89bhx01TcTkmNTGnNO88imTmbSgy4nfujrgVEFKWpMTEGA11EDkTt7mqObTPdigIA=="],
 
+    "@remotion/shapes/@remotion/paths": ["@remotion/paths@4.0.290", "", {}, "sha512-Op7el7GkR1Z84wXVb/LKyqk+7PMUYcZVslHI8W2hJR2WkcnfyT8wDR75eTrWkB5qOTMrWm42E6gVGCa2stzCMw=="],
+
     "@remotion/studio-server/@remotion/bundler": ["@remotion/bundler@4.0.289", "", { "dependencies": { "@remotion/studio": "4.0.289", "@remotion/studio-shared": "4.0.289", "css-loader": "5.2.7", "esbuild": "0.25.0", "react-refresh": "0.9.0", "remotion": "4.0.289", "source-map": "0.7.3", "style-loader": "4.0.0", "webpack": "5.96.1" }, "peerDependencies": { "react": ">=16.8.0", "react-dom": ">=16.8.0" } }, "sha512-llsISxDUKnH8QYOx2YlA9r9ag8POZ6DFksUzT09jjzSwluVjWvzNXEkv147136CqW22oahsxFSlFDJoK2+EVSA=="],
+
+    "@remotion/svg-3d-engine/@remotion/paths": ["@remotion/paths@4.0.290", "", {}, "sha512-Op7el7GkR1Z84wXVb/LKyqk+7PMUYcZVslHI8W2hJR2WkcnfyT8wDR75eTrWkB5qOTMrWm42E6gVGCa2stzCMw=="],
 
     "@remotion/tailwind/tailwindcss": ["tailwindcss@3.4.13", "", { "dependencies": { "@alloc/quick-lru": "^5.2.0", "arg": "^5.0.2", "chokidar": "^3.5.3", "didyoumean": "^1.2.2", "dlv": "^1.1.3", "fast-glob": "^3.3.0", "glob-parent": "^6.0.2", "is-glob": "^4.0.3", "jiti": "^1.21.0", "lilconfig": "^2.1.0", "micromatch": "^4.0.5", "normalize-path": "^3.0.0", "object-hash": "^3.0.0", "picocolors": "^1.0.0", "postcss": "^8.4.23", "postcss-import": "^15.1.0", "postcss-js": "^4.0.1", "postcss-load-config": "^4.0.1", "postcss-nested": "^6.0.1", "postcss-selector-parser": "^6.0.11", "resolve": "^1.22.2", "sucrase": "^3.32.0" }, "bin": { "tailwind": "lib/cli.js", "tailwindcss": "lib/cli.js" } }, "sha512-KqjHOJKogOUt5Bs752ykCeiwvi0fKVkr5oqsFNt/8px/tA8scFPIlkygsf6jXrfCqGHz7VflA6+yytWuM+XhFw=="],
 

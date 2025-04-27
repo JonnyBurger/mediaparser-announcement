@@ -30,7 +30,8 @@ export const LayeredPixelation: React.FC = () => {
       damping: 200,
     },
     delay: 120,
-    durationInFrames: 48,
+    durationInFrames: 120,
+    durationRestThreshold: 0.0001,
   });
 
   const progress = interpolate(frame, [0, 150], [0, 1], {
