@@ -37,11 +37,8 @@ export const AudioVisTrack: React.FC = () => {
   const width = (512 - 1) * numWidth;
 
   return (
-    <div
-      className="text-black"
-      style={{ marginLeft: "20%", height, width, position: "absolute" }}
-    >
-      <Sequence from={10}>
+    <div className="text-black" style={{ marginLeft: "20%", height, width }}>
+      <Sequence from={10} layout="none">
         <Waveform width={width} height={height} strokeWidth={strokeWidth} />
       </Sequence>
       <div

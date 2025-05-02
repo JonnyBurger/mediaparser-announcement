@@ -46,7 +46,7 @@ export const Waveform: React.FC<{
       width={width}
       height={height}
       viewBox={`0 0 ${width} ${height}`}
-      style={{ overflow: "visible" }}
+      style={{ overflow: "visible", position: "absolute" }}
     >
       <path
         fill="none"
