@@ -70,9 +70,7 @@ export const AudioVis: React.FC = () => {
   });
 
   const speed = takeOffSpeedFucntion(frame);
-  const progress = interpolate(speed, [0, 1000], [0, -1500], {
-    extrapolateRight: "clamp",
-  });
+  const progress = interpolate(speed, [0, 1000], [0, -1500], {});
 
   return (
     <AbsoluteFill

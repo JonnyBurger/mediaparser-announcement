@@ -41,7 +41,6 @@ export const Waveform: React.FC<{
     },
   );
 
-  console.log({ progress, cut });
   return (
     <svg
       width={width}
