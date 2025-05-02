@@ -26,7 +26,7 @@ export const Master: React.FC = () => {
       <Sequence durationInFrames={60} from={668}>
         <MediaParserSign lines={["Understand media", "deeper than ever"]} />
       </Sequence>
-      <Sequence durationInFrames={80} from={728}>
+      <Sequence durationInFrames={70} from={728}>
         <MediaParserSign lines={["npm i @remotion/media-parser"]} />
       </Sequence>
       <Sequence durationInFrames={120} from={778}>

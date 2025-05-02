@@ -1,5 +1,11 @@
 import React from "react";
-import { AbsoluteFill, random, spring, useCurrentFrame } from "remotion";
+import {
+  AbsoluteFill,
+  random,
+  spring,
+  useCurrentFrame,
+  useVideoConfig,
+} from "remotion";
 
 const columns = 9;
 const rows = 16;
@@ -8,9 +14,21 @@ const Tile: React.FC<{
   column: number;
   row: number;
 }> = ({ column, row }) => {
+  const { width, height } = useVideoConfig();
   const frame = useCurrentFrame();
-  const index = row * columns + column * 5;
-  const delay = index * 0.15;
+  const index = row * columns + column;
+
+  const positionY = (column / columns) * height;
+  const positionX = (row / rows) * width;
+
+  const centerX = width / 2;
+  const centerY = height / 2;
+
+  const distanceFromCenter = Math.sqrt(
+    (positionX - centerX) ** 2 + (positionY - centerY) ** 2,
+  );
+
+  const delay = distanceFromCenter * 0.01;
 
   const op = spring({
     from: 0,
@@ -20,27 +38,15 @@ const Tile: React.FC<{
     },
     delay,
     frame,
+    durationInFrames: 10,
     fps: 30,
   });
 
-  const op1 = spring({
-    from: 0,
-    to: 1,
-    config: {
-      damping: 200,
-    },
-    delay: delay + 30,
-    frame,
-    fps: 30,
-  });
-
-  const bgOpacity = spring({
-    from: 0,
-    to: 1,
-    config: {
-      damping: 200,
-    },
-    delay: 30,
+  const scaleOut = spring({
+    config: {},
+    reverse: true,
+    delay: delay + 20,
+    durationInFrames: 15,
     frame,
     fps: 30,
   });
@@ -52,17 +58,16 @@ const Tile: React.FC<{
         height: 1080 / columns,
         left: (1920 / rows) * row,
         top: (1080 / columns) * column,
-        opacity: op,
         color: "white",
       }}
     >
       <div
         style={{
-          backgroundColor: `rgba(0, 0, 0, ${1 - bgOpacity})`,
+          backgroundColor: `rgba(0, 0, 0, ${op - 1 + scaleOut})`,
         }}
-        className="flex-1 bg-black text-white flex justify-center items-center text-3xl"
+        className="flex-1 text-white flex justify-center items-center text-3xl"
       >
-        <span style={{ scale: op - op1, display: "block" }}>
+        <span style={{ scale: op + scaleOut - 1, display: "block" }}>
           {Math.floor(random(index) * 16)
             .toString(16)
             .toUpperCase()}

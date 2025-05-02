@@ -17,6 +17,8 @@ import {
   TranslateY,
 } from "./transformation-context";
 import { DecodeScene } from "./DecodeScene";
+import { visualControl } from "@remotion/studio";
+import { z } from "zod";
 
 export const DecodeCloseUp: React.FC = () => {
   const frame = useCurrentFrame();
@@ -31,10 +33,27 @@ export const DecodeCloseUp: React.FC = () => {
     durationInFrames: 150,
   });
 
-  const scale = interpolate(motion, [0, 1], [3.5, 3.1]);
-  const translateX = interpolate(motion, [0, 1], [200, 0]);
-  const translateY = interpolate(motion, [0, 1], [-200, 100]);
-  const rotateZ = interpolate(motion, [0, 1], [-Math.PI / 8, Math.PI / 8]);
+  const startX = visualControl("startX", 200, z.number().step(1));
+  const startY = visualControl("startY", -200, z.number().step(1));
+  const endX = visualControl("endX", 0, z.number().step(1));
+  const endY = visualControl("endY", 100, z.number().step(1));
+  const rotateZStart = visualControl(
+    "rotateZStart",
+    -Math.PI / 8,
+    z.number().step(0.01),
+  );
+  const rotateZEnd = visualControl(
+    "rotateZEnd",
+    Math.PI / 8,
+    z.number().step(0.01),
+  );
+  const scaleStart = visualControl("scaleStart", 3.5, z.number().step(0.01));
+  const scaleEnd = visualControl("scaleEnd", 3.89, z.number().step(0.01));
+
+  const scale = interpolate(motion, [0, 1], [scaleStart, scaleEnd]);
+  const translateX = interpolate(motion, [0, 1], [startX, endX]);
+  const translateY = interpolate(motion, [0, 1], [startY, endY]);
+  const rotateZ = interpolate(motion, [0, 1], [rotateZStart, rotateZEnd]);
 
   return (
     <Sequence from={-0}>
