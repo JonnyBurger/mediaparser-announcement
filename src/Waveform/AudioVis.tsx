@@ -34,14 +34,14 @@ export const AudioVisTrack: React.FC = () => {
   const numWidth = interpolate(shrink, [0, 1], [75, 5]);
   const strokeWidth = interpolate(shrink, [0, 1], [20, 5]);
 
-  const width = (waveform.length - 1) * numWidth;
+  const width = (512 - 1) * numWidth;
 
   return (
     <div
       className="text-black"
       style={{ marginLeft: "20%", height, width, position: "absolute" }}
     >
-      <Sequence from={20}>
+      <Sequence from={10}>
         <Waveform width={width} height={height} strokeWidth={strokeWidth} />
       </Sequence>
       <div

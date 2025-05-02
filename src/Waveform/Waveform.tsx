@@ -16,7 +16,7 @@ export const Waveform: React.FC<{
 
   const points = waveform.map((y, i) => {
     return {
-      x: (i / (waveform.length - 1)) * width,
+      x: (i / (512 - 1)) * width,
       y:
         height / 2 +
         ((y * (i % 2 === 0 ? 1 : -1) * height) / 2 / 255) * amplitude,
