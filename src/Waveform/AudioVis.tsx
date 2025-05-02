@@ -18,7 +18,9 @@ import {
 } from "@remotion/animation-utils";
 import { takeOffSpeedFucntion } from "../remap-speed";
 
-export const AudioVisTrack: React.FC = () => {
+export const AudioVisTrack: React.FC<{
+  style: React.CSSProperties;
+}> = ({ style }) => {
   const frame = useCurrentFrame();
   const { fps, height } = useVideoConfig();
 
@@ -37,19 +39,21 @@ export const AudioVisTrack: React.FC = () => {
   const width = (512 - 1) * numWidth;
 
   return (
-    <div className="text-black" style={{ marginLeft: "20%", height, width }}>
-      <Sequence from={10} layout="none">
-        <Waveform width={width} height={height} strokeWidth={strokeWidth} />
-      </Sequence>
-      <div
-        className="flex flex-row absolute justify-center items-center h-full"
-        style={{ marginLeft: -numWidth / 2 }}
-      >
-        {waveform.slice(0, 32).map((y, i) => {
-          return <Num numWidth={numWidth} y={y} i={i} />;
-        })}
+    <AbsoluteFill style={style}>
+      <div className="text-black" style={{ marginLeft: "20%", height, width }}>
+        <Sequence from={10} layout="none">
+          <Waveform width={width} height={height} strokeWidth={strokeWidth} />
+        </Sequence>
+        <div
+          className="flex flex-row absolute justify-center items-center h-full"
+          style={{ marginLeft: -numWidth / 2 }}
+        >
+          {waveform.slice(0, 32).map((y, i) => {
+            return <Num numWidth={numWidth} y={y} i={i} />;
+          })}
+        </div>
       </div>
-    </div>
+    </AbsoluteFill>
   );
 };
 
@@ -70,23 +74,17 @@ export const AudioVis: React.FC = () => {
   const progress = interpolate(speed, [0, 1000], [0, -1500], {});
 
   return (
-    <AbsoluteFill
-      style={{
-        perspective: 1000,
-      }}
-      className="bg-white"
-    >
-      <Sequence
-        height={height}
-        style={{
-          transform: makeTransform([
-            scale(2.4 - scaled),
-            translateX(150 + progress),
-            rotateY(40),
-          ]),
-        }}
-      >
-        <AudioVisTrack />
+    <AbsoluteFill className="bg-white">
+      <Sequence height={height} style={{ perspective: 1000 }}>
+        <AudioVisTrack
+          style={{
+            transform: makeTransform([
+              scale(2.4 - scaled),
+              translateX(150 + progress),
+              rotateY(40),
+            ]),
+          }}
+        />
       </Sequence>
     </AbsoluteFill>
   );
