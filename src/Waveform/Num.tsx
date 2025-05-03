@@ -6,7 +6,7 @@ export const Num: React.FC<{
   i: number;
   numWidth: number;
 }> = ({ y, i, numWidth }) => {
-  const { fps } = useVideoConfig();
+  const { fps, height } = useVideoConfig();
   const frame = useCurrentFrame();
 
   const appear = spring({
@@ -51,7 +51,8 @@ export const Num: React.FC<{
       style={{
         width: numWidth,
         height: numWidth,
-        marginTop: y * 6 * (i % 2 === 0 ? 1 : -1) * slide,
+        marginTop:
+          y * 3 * (i % 2 === 0 ? 1 : -1) * slide + height / 2 - numWidth / 2,
         position: "relative",
       }}
     >

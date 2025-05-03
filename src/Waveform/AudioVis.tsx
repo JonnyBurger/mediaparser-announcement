@@ -45,7 +45,7 @@ export const AudioVisTrack: React.FC<{
           <Waveform width={width} height={height} strokeWidth={strokeWidth} />
         </Sequence>
         <div
-          className="flex flex-row absolute justify-center items-center h-full"
+          className="flex flex-row absolute justify-center h-full"
           style={{ marginLeft: -numWidth / 2 }}
         >
           {waveform.slice(0, 32).map((y, i) => {
