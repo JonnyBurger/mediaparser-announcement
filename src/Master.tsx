@@ -4,8 +4,8 @@ import { ThreeDGrid } from "./3DGrid/ThreeDGrid";
 import { AudioVisFirstScene } from "./Waveform/AudioVisFirstScene";
 import { MediaParserSign } from "./MediaParserSign/MediaParserSign";
 import { OutTransition } from "./OutTransition";
-import { ParseAndDownloadMedia } from "./ParseAndDownloadMedia";
-import { DecodeCloseUp } from "./ParseAndDownloadMedia/DecodeCloseUp";
+import { DepixelationThreeD } from "./DepixelationThreeD";
+import { DecodeCloseUp } from "./DepixelationThreeD/DecodeCloseUp";
 import { AudioVisSecondScene } from "./Waveform/AudioVisSecondScene";
 
 export const Master: React.FC = () => {
@@ -16,7 +16,7 @@ export const Master: React.FC = () => {
         <ThreeDGrid />
       </Sequence>
       <Sequence durationInFrames={120} from={240}>
-        <ParseAndDownloadMedia />
+        <DepixelationThreeD />
       </Sequence>
       <Sequence durationInFrames={120} from={360}>
         <AudioVisFirstScene />

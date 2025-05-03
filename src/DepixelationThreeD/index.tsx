@@ -9,7 +9,7 @@ import {
 import { RotateX, RotateY, Scale } from "./transformation-context";
 import { DecodeScene } from "./DecodeScene";
 
-export const ParseAndDownloadMedia: React.FC = () => {
+export const DepixelationThreeD: React.FC = () => {
   const frame = useCurrentFrame();
 
   const rotateX = -10 / 20;

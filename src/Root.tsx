@@ -11,12 +11,11 @@ import { AudioVisFirstScene } from "./Waveform/AudioVisFirstScene";
 import { MediaParserSign } from "./MediaParserSign/MediaParserSign";
 import { OutTransition } from "./OutTransition";
 import { Master } from "./Master";
-import { DepixelationSimple } from "./Depixelation/DepixelationSimple";
 import { LayeredPixelation } from "./Depixelation/LayeredPixelation";
 import { BigFontSize } from "./BigFontSize";
-import { ParseAndDownloadMedia } from "./ParseAndDownloadMedia";
-import { DecodeScene } from "./ParseAndDownloadMedia/DecodeScene";
-import { DecodeCloseUp } from "./ParseAndDownloadMedia/DecodeCloseUp";
+import { DepixelationThreeD } from "./DepixelationThreeD";
+import { DecodeScene } from "./DepixelationThreeD/DecodeScene";
+import { DecodeCloseUp } from "./DepixelationThreeD/DecodeCloseUp";
 import { AudioVisSecondScene } from "./Waveform/AudioVisSecondScene";
 export const RemotionRoot = () => {
   return (
@@ -104,72 +103,55 @@ export const RemotionRoot = () => {
         durationInFrames={30 * 30}
         width={1920}
       />
-      <Composition
-        id="DepixelationSimple"
-        component={DepixelationSimple}
-        fps={30}
-        height={1080}
-        durationInFrames={30 * 30}
-        width={1920}
-        defaultProps={{
-          level: 5,
-          type: "tile",
-          withNumbers: false,
-          fontStyles: {
-            fontSize: 50,
-            fontFamily: "GT Planar",
-          },
-          appear: 0,
-          disappear: 0,
-        }}
-      />
-      <Composition
-        id="LayeredPixelation"
-        component={LayeredPixelation}
-        fps={30}
-        height={1080}
-        durationInFrames={30 * 30}
-        width={1920}
-        defaultProps={{
-          level: 5,
-          type: "tile",
-        }}
-      />
-      <Composition
-        id="BigFontSize"
-        component={BigFontSize}
-        fps={30}
-        height={1080}
-        durationInFrames={30 * 30}
-        width={1920}
-      />
-      <Composition
-        id="ParseAndDownloadMedia"
-        component={ParseAndDownloadMedia}
-        fps={30}
-        height={1080}
-        durationInFrames={30 * 30}
-        width={1920}
-      />
-      <Composition
-        id="DecodeScene"
-        component={DecodeScene}
-        fps={30}
-        height={1080}
-        durationInFrames={30 * 30}
-        width={1920}
-        defaultProps={{
-          src: staticFile("LayeredPixelation.mp4"),
-        }}
-      />
-      <Composition
-        id="DecodeCloseUp"
-        component={DecodeCloseUp}
-        fps={30}
-        height={1080}
-        durationInFrames={120}
-        width={1920}
-      />
+      <Folder name="3-Depixelation">
+        <Composition
+          id="LayeredPixelation"
+          component={LayeredPixelation}
+          fps={30}
+          height={1080}
+          durationInFrames={30 * 30}
+          width={1920}
+          defaultProps={{
+            level: 5,
+            type: "tile",
+          }}
+        />
+        <Composition
+          id="DecodeScene"
+          component={DecodeScene}
+          fps={30}
+          height={1080}
+          durationInFrames={30 * 30}
+          width={1920}
+          defaultProps={{
+            src: staticFile("LayeredPixelation.mp4"),
+          }}
+        />
+        <Composition
+          id="DecodeCloseUp"
+          component={DecodeCloseUp}
+          fps={30}
+          height={1080}
+          durationInFrames={120}
+          width={1920}
+        />
+        <Composition
+          id="BigFontSize"
+          component={BigFontSize}
+          fps={30}
+          height={1080}
+          durationInFrames={30 * 30}
+          width={1920}
+        />
+        <Composition
+          id="DepixelationThreeD"
+          component={DepixelationThreeD}
+          fps={30}
+          height={1080}
+          durationInFrames={30 * 30}
+          width={1920}
+        />
+      </Folder>
     </>
   );
 };
