@@ -20,6 +20,7 @@ import { AudioVisSecondScene } from "./Waveform/AudioVisSecondScene";
 import { CharactersAlt } from "./Characters/CharactersAlt";
 import { Characters } from "./Characters/Characters";
 import { AudioVisIntermediateScene } from "./Waveform/AudioVisIntermediateScene";
+import { DecodeCloseUpTwo } from "./DepixelationThreeD/DecodeCloseUpTwo";
 
 export const RemotionRoot = () => {
   return (
@@ -142,6 +143,14 @@ export const RemotionRoot = () => {
         <Composition
           id="DecodeCloseUp"
           component={DecodeCloseUp}
+          fps={30}
+          height={1080}
+          durationInFrames={120}
+          width={1920}
+        />
+        <Composition
+          id="DecodeCloseUpTwo"
+          component={DecodeCloseUpTwo}
           fps={30}
           height={1080}
           durationInFrames={120}

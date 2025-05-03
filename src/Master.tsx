@@ -1,6 +1,5 @@
 import React from "react";
-import { AbsoluteFill, Audio, Sequence, staticFile } from "remotion";
-import { ThreeDGrid } from "./3DGrid/ThreeDGrid";
+import { AbsoluteFill, Audio, Sequence, Series, staticFile } from "remotion";
 import { AudioVisFirstScene } from "./Waveform/AudioVisFirstScene";
 import { MediaParserSign } from "./MediaParserSign/MediaParserSign";
 import { OutTransition } from "./OutTransition";
@@ -10,48 +9,64 @@ import { AudioVisSecondScene } from "./Waveform/AudioVisSecondScene";
 import { Characters } from "./Characters/Characters";
 import { CharactersAlt } from "./Characters/CharactersAlt";
 import { AudioVisIntermediateScene } from "./Waveform/AudioVisIntermediateScene";
+import { DecodeCloseUpTwo } from "./DepixelationThreeD/DecodeCloseUpTwo";
+import { ThreeDGrid } from "./3DGrid/ThreeDGrid";
 
 export const Master: React.FC = () => {
   return (
     <AbsoluteFill>
       <Audio src={staticFile("music.mp3")} />
-      <Sequence durationInFrames={60}>
-        <Characters />
-      </Sequence>
-      <Sequence durationInFrames={60} from={60}>
-        <CharactersAlt />
-      </Sequence>
-      <Sequence durationInFrames={120} from={120}>
-        <ThreeDGrid />
-      </Sequence>
-      <Sequence durationInFrames={120} from={240}>
-        <DepixelationThreeD />
-      </Sequence>
-      <Sequence durationInFrames={90} from={360}>
-        <AudioVisFirstScene />
-      </Sequence>
-      <Sequence durationInFrames={60} from={450}>
-        <DecodeCloseUp />
-      </Sequence>
-      <Sequence durationInFrames={60} from={510}>
-        <Sequence from={-112}>
-          <AudioVisIntermediateScene />
-        </Sequence>
-      </Sequence>
-      <Sequence durationInFrames={60} from={570}>
-        <Sequence from={-42}>
-          <AudioVisSecondScene />
-        </Sequence>
-      </Sequence>
-      <Sequence durationInFrames={60} from={668}>
-        <MediaParserSign lines={["Understand media", "deeper than ever"]} />
-      </Sequence>
-      <Sequence durationInFrames={70} from={728}>
-        <MediaParserSign lines={["npm i @remotion/media-parser"]} />
-      </Sequence>
-      <Sequence durationInFrames={120} from={778}>
-        <OutTransition />
-      </Sequence>
+      <Series>
+        <Series.Sequence durationInFrames={60}>
+          <Characters />
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={90}>
+          <ThreeDGrid />
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={60}>
+          <CharactersAlt />
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={90}>
+          <Sequence from={-60}>
+            <ThreeDGrid />
+          </Sequence>
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={60}>
+          <DecodeCloseUpTwo />
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={90}>
+          <AudioVisFirstScene />
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={55}>
+          <Sequence from={-50}>
+            <DecodeCloseUpTwo />
+          </Sequence>
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={60}>
+          <Sequence from={-106}>
+            <AudioVisIntermediateScene />
+          </Sequence>
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={60}>
+          <Sequence>
+            <DecodeCloseUp />
+          </Sequence>
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={90}>
+          <Sequence from={-30}>
+            <AudioVisSecondScene />
+          </Sequence>
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={60}>
+          <MediaParserSign lines={["Understand media", "deeper than ever"]} />
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={70}>
+          <MediaParserSign lines={["npm i @remotion/media-parser"]} />
+        </Series.Sequence>
+        <Series.Sequence durationInFrames={120}>
+          <OutTransition />
+        </Series.Sequence>
+      </Series>
     </AbsoluteFill>
   );
 };
