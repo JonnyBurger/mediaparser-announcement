@@ -3,7 +3,6 @@ import { AbsoluteFill, Audio, Sequence, Series, staticFile } from "remotion";
 import { AudioVisFirstScene } from "./Waveform/AudioVisFirstScene";
 import { MediaParserSign } from "./MediaParserSign/MediaParserSign";
 import { OutTransition } from "./OutTransition";
-import { DepixelationThreeD } from "./DepixelationThreeD";
 import { DecodeCloseUp } from "./DepixelationThreeD/DecodeCloseUp";
 import { AudioVisSecondScene } from "./Waveform/AudioVisSecondScene";
 import { Characters } from "./Characters/Characters";
@@ -51,9 +50,7 @@ export const Master: React.FC = () => {
           </Sequence>
         </Series.Sequence>
         <Series.Sequence durationInFrames={90}>
-          <Sequence from={-30}>
-            <AudioVisSecondScene />
-          </Sequence>
+          <AudioVisSecondScene />
         </Series.Sequence>
         <Series.Sequence durationInFrames={60}>
           <MediaParserSign lines={["Understand media", "deeper than ever"]} />
