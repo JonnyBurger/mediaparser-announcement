@@ -18,40 +18,80 @@ export const ThreeDGrid = () => {
 
   const progress = interpolate(frame, [0, 300], [0, 1]);
 
-  const startScale = visualControl("startScale", 1.95, z.number().step(0.01));
-  const endScale = visualControl("endScale", -0.31, z.number().step(0.01));
+  const startScale = visualControl(
+    "three-startScale",
+    1.95,
+    z.number().step(0.01),
+  );
+  const endScale = visualControl(
+    "three-endScale",
+    -0.31,
+    z.number().step(0.01),
+  );
   const actualScale = interpolate(progress, [0, 1], [startScale, endScale]);
 
-  const startRotateY = visualControl("startRotateY", 10, z.number().step(1));
-  const endRotateY = visualControl("endRotateY", -18.14, z.number().step(1));
+  const startRotateY = visualControl(
+    "three-startRotateY",
+    10,
+    z.number().step(1),
+  );
+  const endRotateY = visualControl(
+    "three-endRotateY",
+    -18.14,
+    z.number().step(1),
+  );
   const currentRotateY = interpolate(
     progress,
     [0, 1],
     [startRotateY, endRotateY],
   );
 
-  const startRotateX = visualControl("startRotateX", 50, z.number().step(1));
-  const endRotateX = visualControl("endRotateX", 80.38, z.number().step(1));
+  const startRotateX = visualControl(
+    "three-startRotateX",
+    50,
+    z.number().step(1),
+  );
+  const endRotateX = visualControl(
+    "three-endRotateX",
+    80.38,
+    z.number().step(1),
+  );
   const currentRotateX = interpolate(
     progress,
     [0, 1],
     [startRotateX, endRotateX],
   );
 
-  const startRotateZ = visualControl("startRotateZ", 16, z.number().step(1));
-  const endRotateZ = visualControl("endRotateZ", -14.81, z.number().step(1));
+  const startRotateZ = visualControl(
+    "three-startRotateZ",
+    16,
+    z.number().step(1),
+  );
+  const endRotateZ = visualControl(
+    "three-endRotateZ",
+    -14.81,
+    z.number().step(1),
+  );
   const currentRotateZ = interpolate(
     progress,
     [0, 1],
     [startRotateZ, endRotateZ],
   );
 
-  const startTransX = visualControl("startTransX", -322, z.number().step(1));
-  const endTransX = visualControl("endTransX", 2140, z.number().step(1));
+  const startTransX = visualControl(
+    "three-startTransX",
+    -322,
+    z.number().step(1),
+  );
+  const endTransX = visualControl("three-endTransX", 2140, z.number().step(1));
   const currentTransX = interpolate(progress, [0, 1], [startTransX, endTransX]);
 
-  const startTransY = visualControl("startTransY", 244, z.number().step(1));
-  const endTransY = visualControl("endTransY", -3593, z.number().step(1));
+  const startTransY = visualControl(
+    "three-startTransY",
+    244,
+    z.number().step(1),
+  );
+  const endTransY = visualControl("three-endTransY", -3593, z.number().step(1));
   const currentTransY = interpolate(progress, [0, 1], [startTransY, endTransY]);
 
   return (

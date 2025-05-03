@@ -37,7 +37,7 @@ export const CharactersAlt: React.FC = () => {
   const rotYEnd = visualControl("alt-rotateY-end", 0.19, z.number().step(0.01));
   const rotXStart = visualControl(
     "alt-rotateX-start",
-    0.79,
+    1.06,
     z.number().step(0.01),
   );
   const rotXEnd = visualControl("alt-rotateX-end", 0.79, z.number().step(0.01));
@@ -49,22 +49,22 @@ export const CharactersAlt: React.FC = () => {
   const rotZEnd = visualControl("alt-rotateZ-end", 0.14, z.number().step(0.01));
   const scaleStart = visualControl(
     "alt-scale-start",
-    1.58,
+    1.84,
     z.number().step(0.01),
   );
-  const scaleEnd = visualControl("alt-scale-end", 1.96, z.number().step(0.01));
+  const scaleEnd = visualControl("alt-scale-end", 3.35, z.number().step(0.01));
   const transXStart = visualControl(
     "alt-transX-start",
-    -138,
+    -900,
     z.number().step(1),
   );
-  const transXEnd = visualControl("alt-transX-end", -1022, z.number().step(1));
+  const transXEnd = visualControl("alt-transX-end", -1831, z.number().step(1));
   const transYStart = visualControl(
     "alt-transY-start",
-    -242,
+    -504,
     z.number().step(1),
   );
-  const transYEnd = visualControl("alt-transY-end", 14, z.number().step(1));
+  const transYEnd = visualControl("alt-transY-end", -777, z.number().step(1));
 
   const rotY = interpolate(progress, [0, 1], [rotYStart, rotYEnd]);
   const rotX = interpolate(progress, [0, 1], [rotXStart, rotXEnd]);

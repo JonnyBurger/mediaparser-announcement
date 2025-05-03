@@ -32,8 +32,16 @@ export const AudioVisSecondScene: React.FC = () => {
     durationInFrames: 120,
   });
 
-  const startStateY = visualControl("startRotateY", -40, z.number().step(0.01));
-  const endRotateY = visualControl("endRotateX", -78.25, z.number().step(0.01));
+  const startStateY = visualControl(
+    "two-startRotateY",
+    -40,
+    z.number().step(0.01),
+  );
+  const endRotateY = visualControl(
+    "two-endRotateX",
+    -78.25,
+    z.number().step(0.01),
+  );
 
   const rotY = interpolate(frame, [0, 120], [startStateY, endRotateY]);
 

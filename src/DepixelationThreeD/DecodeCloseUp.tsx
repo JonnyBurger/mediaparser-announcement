@@ -33,22 +33,26 @@ export const DecodeCloseUp: React.FC = () => {
     durationInFrames: 150,
   });
 
-  const startX = visualControl("startX", 200, z.number().step(1));
-  const startY = visualControl("startY", -200, z.number().step(1));
-  const endX = visualControl("endX", 0, z.number().step(1));
-  const endY = visualControl("endY", 100, z.number().step(1));
+  const startX = visualControl("one-startX", 200, z.number().step(1));
+  const startY = visualControl("one-startY", -200, z.number().step(1));
+  const endX = visualControl("one-endX", 0, z.number().step(1));
+  const endY = visualControl("one-endY", 100, z.number().step(1));
   const rotateZStart = visualControl(
-    "rotateZStart",
+    "one-rotateZStart",
     -Math.PI / 8,
     z.number().step(0.01),
   );
   const rotateZEnd = visualControl(
-    "rotateZEnd",
+    "one-rotateZEnd",
     Math.PI / 8,
     z.number().step(0.01),
   );
-  const scaleStart = visualControl("scaleStart", 3.5, z.number().step(0.01));
-  const scaleEnd = visualControl("scaleEnd", 3.89, z.number().step(0.01));
+  const scaleStart = visualControl(
+    "one-scaleStart",
+    3.5,
+    z.number().step(0.01),
+  );
+  const scaleEnd = visualControl("one-scaleEnd", 3.89, z.number().step(0.01));
 
   const scale = interpolate(motion, [0, 1], [scaleStart, scaleEnd]);
   const translateX = interpolate(motion, [0, 1], [startX, endX]);

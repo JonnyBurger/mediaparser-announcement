@@ -9,6 +9,7 @@ import { DecodeCloseUp } from "./DepixelationThreeD/DecodeCloseUp";
 import { AudioVisSecondScene } from "./Waveform/AudioVisSecondScene";
 import { Characters } from "./Characters/Characters";
 import { CharactersAlt } from "./Characters/CharactersAlt";
+import { AudioVisIntermediateScene } from "./Waveform/AudioVisIntermediateScene";
 
 export const Master: React.FC = () => {
   return (
@@ -26,11 +27,16 @@ export const Master: React.FC = () => {
       <Sequence durationInFrames={120} from={240}>
         <DepixelationThreeD />
       </Sequence>
-      <Sequence durationInFrames={120} from={360}>
+      <Sequence durationInFrames={90} from={360}>
         <AudioVisFirstScene />
       </Sequence>
-      <Sequence durationInFrames={90} from={480}>
+      <Sequence durationInFrames={60} from={450}>
         <DecodeCloseUp />
+      </Sequence>
+      <Sequence durationInFrames={60} from={510}>
+        <Sequence from={-112}>
+          <AudioVisIntermediateScene />
+        </Sequence>
       </Sequence>
       <Sequence durationInFrames={60} from={570}>
         <Sequence from={-42}>
