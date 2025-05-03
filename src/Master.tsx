@@ -9,9 +9,9 @@ import { CharactersAlt } from "./Characters/CharactersAlt";
 import { AudioVisIntermediateScene } from "./Waveform/AudioVisIntermediateScene";
 import { DecodeCloseUpTwo } from "./DepixelationThreeD/DecodeCloseUpTwo";
 import { ThreeDGrid } from "./3DGrid/ThreeDGrid";
-import { Cover } from "./Cover";
 import { TransitionSeries } from "@remotion/transitions";
 import { ThreeDGridSecond } from "./3DGrid/ThreeDGridSecond";
+import { MediaParserEndCard } from "./MediaParserEndCard";
 
 export const Master: React.FC = () => {
   return (
@@ -49,11 +49,11 @@ export const Master: React.FC = () => {
         </TransitionSeries.Sequence>
         <TransitionSeries.Sequence durationInFrames={210}>
           <AudioVisSecondScene />
-          <Sequence from={150}>
-            <Cover />
+          <Sequence from={140}>
+            <MediaParserEndCard />
           </Sequence>
         </TransitionSeries.Sequence>
-        <TransitionSeries.Sequence durationInFrames={120} offset={-20}>
+        <TransitionSeries.Sequence durationInFrames={120} offset={-30}>
           <OutTransition />
         </TransitionSeries.Sequence>
       </TransitionSeries>

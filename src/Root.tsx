@@ -23,6 +23,7 @@ import { AudioVisIntermediateScene } from "./Waveform/AudioVisIntermediateScene"
 import { DecodeCloseUpTwo } from "./DepixelationThreeD/DecodeCloseUpTwo";
 import { Cover } from "./Cover";
 import { ThreeDGridSecond } from "./3DGrid/ThreeDGridSecond";
+import { MediaParserEndCard } from "./MediaParserEndCard";
 
 export const RemotionRoot = () => {
   return (
@@ -98,10 +99,20 @@ export const RemotionRoot = () => {
           width={1920}
         />
       </Folder>
-
       <Composition
         id="MediaParserSign"
         component={MediaParserSign}
+        fps={30}
+        height={1080}
+        durationInFrames={500}
+        width={1920}
+        defaultProps={{
+          lines: ["Understand media", "deeper than ever"],
+        }}
+      />
+      <Composition
+        id="MediaParserEndCard"
+        component={MediaParserEndCard}
         fps={30}
         height={1080}
         durationInFrames={500}
