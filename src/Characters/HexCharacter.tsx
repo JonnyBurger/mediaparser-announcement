@@ -28,7 +28,7 @@ export const HexCharacter: React.FC<{
   scale = 1,
   transforms,
 }) => {
-  const left = (column * WIDTH) / COLUMNS;
+  const left = (column * WIDTH) / COLUMNS + (1920 - 1080) / 2;
   const top = (row * HEIGHT) / ROWS;
   return (
     <div

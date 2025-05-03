@@ -13,6 +13,7 @@
     "@remotion/google-fonts": "4.0.295",
     "@remotion/layout-utils": "4.0.295",
     "@remotion/media-utils": "4.0.295",
+    "@remotion/noise": "4.0.295",
     "@remotion/paths": "4.0.295",
     "@remotion/shapes": "4.0.295",
     "@remotion/studio": "4.0.295",
