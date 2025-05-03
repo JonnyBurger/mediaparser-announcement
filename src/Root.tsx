@@ -21,6 +21,7 @@ import { CharactersAlt } from "./Characters/CharactersAlt";
 import { Characters } from "./Characters/Characters";
 import { AudioVisIntermediateScene } from "./Waveform/AudioVisIntermediateScene";
 import { DecodeCloseUpTwo } from "./DepixelationThreeD/DecodeCloseUpTwo";
+import { Cover } from "./Cover";
 
 export const RemotionRoot = () => {
   return (
@@ -189,6 +190,16 @@ export const RemotionRoot = () => {
           height={1080}
           durationInFrames={150}
           width={1920}
+        />
+      </Folder>
+      <Folder name="Cover">
+        <Composition
+          id="Cover"
+          component={Cover}
+          width={1920}
+          height={1080}
+          fps={30}
+          durationInFrames={30 * 30}
         />
       </Folder>
     </>

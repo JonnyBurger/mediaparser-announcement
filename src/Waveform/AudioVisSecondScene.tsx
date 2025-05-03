@@ -10,7 +10,6 @@ import {
 import {
   makeTransform,
   perspective,
-  rotate,
   rotateX,
   rotateY,
   scale,

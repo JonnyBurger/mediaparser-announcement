@@ -18,6 +18,7 @@
     "@remotion/shapes": "4.0.295",
     "@remotion/studio": "4.0.295",
     "@remotion/svg-3d-engine": "4.0.295",
+    "@remotion/transitions": "4.0.295",
     "@remotion/zod-types": "4.0.295",
     "codehike": "1.0.4",
     "polished": "^4.3.1",
