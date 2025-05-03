@@ -9,5 +9,5 @@ export const remapSpeed = (frame: number, speed: (fr: number) => number) => {
   return framesPassed;
 };
 
-export const takeOffSpeedFucntion = (f: number) =>
+export const takeOffSpeedFunction = (f: number) =>
   10 ** interpolate(f, [0, 120], [-0.2, 1.5]);

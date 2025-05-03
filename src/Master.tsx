@@ -1,11 +1,12 @@
 import React from "react";
 import { AbsoluteFill, Audio, Sequence, staticFile } from "remotion";
 import { ThreeDGrid } from "./3DGrid/ThreeDGrid";
-import { AudioVis } from "./Waveform/AudioVis";
+import { AudioVisFirstScene } from "./Waveform/AudioVisFirstScene";
 import { MediaParserSign } from "./MediaParserSign/MediaParserSign";
 import { OutTransition } from "./OutTransition";
 import { ParseAndDownloadMedia } from "./ParseAndDownloadMedia";
 import { DecodeCloseUp } from "./ParseAndDownloadMedia/DecodeCloseUp";
+import { AudioVisSecondScene } from "./Waveform/AudioVisSecondScene";
 
 export const Master: React.FC = () => {
   return (
@@ -18,10 +19,15 @@ export const Master: React.FC = () => {
         <ParseAndDownloadMedia />
       </Sequence>
       <Sequence durationInFrames={120} from={360}>
-        <AudioVis />
+        <AudioVisFirstScene />
       </Sequence>
       <Sequence durationInFrames={90} from={480}>
         <DecodeCloseUp />
+      </Sequence>
+      <Sequence durationInFrames={60} from={570}>
+        <Sequence from={-42}>
+          <AudioVisSecondScene />
+        </Sequence>
       </Sequence>
       <Sequence durationInFrames={60} from={668}>
         <MediaParserSign lines={["Understand media", "deeper than ever"]} />

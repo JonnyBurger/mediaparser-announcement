@@ -1,7 +1,7 @@
 import { createSmoothSvgPath } from "@remotion/media-utils";
 import { getLength, PathInternals } from "@remotion/paths";
 import { interpolate, useCurrentFrame } from "remotion";
-import { takeOffSpeedFucntion } from "../remap-speed";
+import { takeOffSpeedFunction } from "../remap-speed";
 import { waveform } from "./data";
 
 export const Waveform: React.FC<{
@@ -12,7 +12,7 @@ export const Waveform: React.FC<{
   const frame = useCurrentFrame();
   const amplitude = 1.5;
 
-  const speed = takeOffSpeedFucntion(frame);
+  const speed = takeOffSpeedFunction(frame);
 
   const points = waveform.map((y, i) => {
     return {
@@ -46,7 +46,7 @@ export const Waveform: React.FC<{
       width={width}
       height={height}
       viewBox={`0 0 ${width} ${height}`}
-      style={{ overflow: "visible", position: "absolute" }}
+      style={{ overflow: "visible" }}
     >
       <path
         fill="none"

@@ -7,7 +7,7 @@ import { schema } from "./calculate-metadata/schema";
 import { Grid } from "./Grid/Grid";
 import { HEIGHT } from "./Grid/layout";
 import { ThreeDGrid } from "./3DGrid/ThreeDGrid";
-import { AudioVis } from "./Waveform/AudioVis";
+import { AudioVisFirstScene } from "./Waveform/AudioVisFirstScene";
 import { MediaParserSign } from "./MediaParserSign/MediaParserSign";
 import { OutTransition } from "./OutTransition";
 import { Master } from "./Master";
@@ -17,6 +17,7 @@ import { BigFontSize } from "./BigFontSize";
 import { ParseAndDownloadMedia } from "./ParseAndDownloadMedia";
 import { DecodeScene } from "./ParseAndDownloadMedia/DecodeScene";
 import { DecodeCloseUp } from "./ParseAndDownloadMedia/DecodeCloseUp";
+import { AudioVisSecondScene } from "./Waveform/AudioVisSecondScene";
 export const RemotionRoot = () => {
   return (
     <>
@@ -54,8 +55,16 @@ export const RemotionRoot = () => {
         width={1920}
       />
       <Composition
-        id="Waveform"
-        component={AudioVis}
+        id="WaveformFirstScene"
+        component={AudioVisFirstScene}
+        fps={30}
+        height={1080}
+        durationInFrames={500}
+        width={1920}
+      />
+      <Composition
+        id="WaveformSecondScene"
+        component={AudioVisSecondScene}
         fps={30}
         height={1080}
         durationInFrames={500}

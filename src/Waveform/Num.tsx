@@ -24,7 +24,7 @@ export const Num: React.FC<{
     config: {
       damping: 200,
     },
-    delay: i * 2 + 25,
+    delay: i * 2 + 15,
   });
 
   const borderRadius = interpolate(slide, [0, 0.5], [0, numWidth / 2]);
