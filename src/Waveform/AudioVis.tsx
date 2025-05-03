@@ -39,19 +39,14 @@ export const AudioVisTrack: React.FC<{
   const width = (512 - 1) * numWidth;
 
   return (
-    <AbsoluteFill style={style}>
-      <div className="text-black" style={{ height, width }}>
-        <Sequence from={10} layout="none">
-          <Waveform width={width} height={height} strokeWidth={strokeWidth} />
-        </Sequence>
-        <div
-          className="flex flex-row absolute h-full"
-          style={{ marginLeft: -numWidth / 2 }}
-        >
-          {waveform.slice(0, 32).map((y, i) => {
-            return <Num numWidth={numWidth} y={y} i={i} />;
-          })}
-        </div>
+    <AbsoluteFill style={style} className="text-black">
+      <Sequence from={10} layout="none">
+        <Waveform width={width} height={height} strokeWidth={strokeWidth} />
+      </Sequence>
+      <div className="flex flex-row absolute h-full">
+        {waveform.slice(0, 32).map((y, i) => {
+          return <Num numWidth={numWidth} y={y} i={i} />;
+        })}
       </div>
     </AbsoluteFill>
   );

@@ -54,6 +54,8 @@ export const Num: React.FC<{
         marginTop:
           y * 3 * (i % 2 === 0 ? 1 : -1) * slide + height / 2 - numWidth / 2,
         position: "relative",
+        marginLeft: -numWidth / 2,
+        marginRight: numWidth / 2,
       }}
     >
       {appear < 0.88 ? (
