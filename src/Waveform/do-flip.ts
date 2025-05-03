@@ -9,7 +9,7 @@ export const doFlip = ({ frame, fps }: { frame: number; fps: number }) => {
     config: {
       damping: 200,
     },
-    delay: 85,
+    delay: 110,
   });
 
   const startStateY = visualControl(

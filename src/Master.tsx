@@ -49,11 +49,8 @@ export const Master: React.FC = () => {
             <DecodeCloseUp />
           </Sequence>
         </Series.Sequence>
-        <Series.Sequence durationInFrames={90}>
+        <Series.Sequence durationInFrames={120}>
           <AudioVisSecondScene />
-        </Series.Sequence>
-        <Series.Sequence durationInFrames={60}>
-          <MediaParserSign lines={["Understand media", "deeper than ever"]} />
         </Series.Sequence>
         <Series.Sequence durationInFrames={70}>
           <MediaParserSign lines={["npm i @remotion/media-parser"]} />
