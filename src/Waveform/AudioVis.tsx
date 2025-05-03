@@ -40,7 +40,7 @@ export const AudioVisTrack: React.FC<{
 
   return (
     <AbsoluteFill style={style}>
-      <div className="text-black" style={{ marginLeft: "20%", height, width }}>
+      <div className="text-black" style={{ height, width }}>
         <Sequence from={10} layout="none">
           <Waveform width={width} height={height} strokeWidth={strokeWidth} />
         </Sequence>
@@ -79,6 +79,7 @@ export const AudioVis: React.FC = () => {
         <AudioVisTrack
           style={{
             transform: makeTransform([
+              translateX(384),
               scale(2.4 - scaled),
               translateX(150 + progress),
               rotateY(40),
