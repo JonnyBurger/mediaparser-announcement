@@ -17,7 +17,8 @@ import { DepixelationThreeD } from "./DepixelationThreeD";
 import { DecodeScene } from "./DepixelationThreeD/DecodeScene";
 import { DecodeCloseUp } from "./DepixelationThreeD/DecodeCloseUp";
 import { AudioVisSecondScene } from "./Waveform/AudioVisSecondScene";
-import { Characters } from "./Characters/Characters";
+import { Characters, CharactersAlt } from "./Characters/CharactersAlt";
+
 export const RemotionRoot = () => {
   return (
     <>
@@ -159,7 +160,15 @@ export const RemotionRoot = () => {
           component={Characters}
           fps={30}
           height={1080}
-          durationInFrames={30 * 30}
+          durationInFrames={150}
+          width={1920}
+        />
+        <Composition
+          id="CharactersAlt"
+          component={CharactersAlt}
+          fps={30}
+          height={1080}
+          durationInFrames={150}
           width={1920}
         />
       </Folder>
