@@ -13,30 +13,30 @@ import {
 import { visualControl } from "@remotion/studio";
 import { z } from "zod";
 
-export const ThreeDGrid = () => {
-  const frame = useCurrentFrame();
+const ThreeDGridSecondInternal = () => {
+  const frame = useCurrentFrame() - 60;
 
   const progress = interpolate(frame, [0, 300], [0, 1]);
 
   const startScale = visualControl(
-    "three-startScale",
-    1.95,
+    "three-second-startScale",
+    1.6,
     z.number().step(0.01),
   );
   const endScale = visualControl(
-    "three-endScale",
-    -0.31,
+    "three-second-endScale",
+    0.29,
     z.number().step(0.01),
   );
   const actualScale = interpolate(progress, [0, 1], [startScale, endScale]);
 
   const startRotateY = visualControl(
-    "three-startRotateY",
-    32,
+    "three-second-startRotateY",
+    10,
     z.number().step(1),
   );
   const endRotateY = visualControl(
-    "three-endRotateY",
+    "three-second-endRotateY",
     -18.14,
     z.number().step(1),
   );
@@ -47,12 +47,12 @@ export const ThreeDGrid = () => {
   );
 
   const startRotateX = visualControl(
-    "three-startRotateX",
+    "three-second-startRotateX",
     50,
     z.number().step(1),
   );
   const endRotateX = visualControl(
-    "three-endRotateX",
+    "three-second-endRotateX",
     80.38,
     z.number().step(1),
   );
@@ -63,12 +63,12 @@ export const ThreeDGrid = () => {
   );
 
   const startRotateZ = visualControl(
-    "three-startRotateZ",
-    18,
+    "three-second-startRotateZ",
+    -20,
     z.number().step(1),
   );
   const endRotateZ = visualControl(
-    "three-endRotateZ",
+    "three-second-endRotateZ",
     -14.81,
     z.number().step(1),
   );
@@ -79,19 +79,27 @@ export const ThreeDGrid = () => {
   );
 
   const startTransX = visualControl(
-    "three-startTransX",
-    -322,
+    "three-second-startTransX",
+    415,
     z.number().step(1),
   );
-  const endTransX = visualControl("three-endTransX", 1810, z.number().step(1));
+  const endTransX = visualControl(
+    "three-second-endTransX",
+    1173,
+    z.number().step(1),
+  );
   const currentTransX = interpolate(progress, [0, 1], [startTransX, endTransX]);
 
   const startTransY = visualControl(
-    "three-startTransY",
-    244,
+    "three-second-startTransY",
+    -794,
     z.number().step(1),
   );
-  const endTransY = visualControl("three-endTransY", -1245, z.number().step(1));
+  const endTransY = visualControl(
+    "three-second-endTransY",
+    -3551,
+    z.number().step(1),
+  );
   const currentTransY = interpolate(progress, [0, 1], [startTransY, endTransY]);
 
   return (
@@ -118,5 +126,13 @@ export const ThreeDGrid = () => {
         </Sequence>
       </AbsoluteFill>
     </AbsoluteFill>
+  );
+};
+
+export const ThreeDGridSecond = () => {
+  return (
+    <Sequence from={-60}>
+      <ThreeDGridSecondInternal />
+    </Sequence>
   );
 };

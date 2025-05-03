@@ -1,3 +1,4 @@
+import { transparentize } from "polished";
 import React from "react";
 import {
   AbsoluteFill,
@@ -63,7 +64,7 @@ const Tile: React.FC<{
     >
       <div
         style={{
-          backgroundColor: `rgba(0, 0, 0, ${op - 1 + scaleOut})`,
+          backgroundColor: transparentize(1 - (op - 1 + scaleOut), "#0D1116"),
         }}
         className="flex-1 text-white flex justify-center items-center text-3xl"
       >

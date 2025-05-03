@@ -34,7 +34,7 @@ export const Grid = () => {
           label="width"
         />
       </Sequence>
-      <Sequence from={30}>
+      <Sequence from={15}>
         <Flash
           actualContent
           content="1080"
@@ -43,10 +43,10 @@ export const Grid = () => {
           label="height"
         />
       </Sequence>
-      <Sequence from={45}>
+      <Sequence from={25}>
         <Flash actualContent content="30" width={2} offset={90} label="fps" />
       </Sequence>
-      <Sequence from={52}>
+      <Sequence from={70}>
         <Flash
           background="#8e44ad"
           content="10802160234902349"
@@ -55,7 +55,7 @@ export const Grid = () => {
           label="H.264 keyframe"
         />
       </Sequence>
-      <Sequence from={58}>
+      <Sequence from={75}>
         <Flash
           background="rgb(16 171 58)"
           content="1080216023490"
@@ -64,7 +64,7 @@ export const Grid = () => {
           label="AAC sample"
         />
       </Sequence>
-      <Sequence from={66}>
+      <Sequence from={78}>
         <Flash
           background="#8e44ad"
           content="10802160234902349"
@@ -73,7 +73,7 @@ export const Grid = () => {
           label="H.264 delta"
         />
       </Sequence>
-      <Sequence from={70}>
+      <Sequence from={80}>
         <Flash
           background="#8e44ad"
           content="1080216023490234alksjfaklsöf9"
@@ -82,7 +82,7 @@ export const Grid = () => {
           label="H.264 delta"
         />
       </Sequence>
-      <Sequence from={76}>
+      <Sequence from={86}>
         <Flash
           background="rgb(16 171 58)"
           content="10802160234902349"

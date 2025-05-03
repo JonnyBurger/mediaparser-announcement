@@ -22,6 +22,7 @@ import { Characters } from "./Characters/Characters";
 import { AudioVisIntermediateScene } from "./Waveform/AudioVisIntermediateScene";
 import { DecodeCloseUpTwo } from "./DepixelationThreeD/DecodeCloseUpTwo";
 import { Cover } from "./Cover";
+import { ThreeDGridSecond } from "./3DGrid/ThreeDGridSecond";
 
 export const RemotionRoot = () => {
   return (
@@ -59,7 +60,15 @@ export const RemotionRoot = () => {
           component={ThreeDGrid}
           fps={30}
           height={1080}
-          durationInFrames={200}
+          durationInFrames={60}
+          width={1920}
+        />
+        <Composition
+          id="ThreeDGridSecond"
+          component={ThreeDGridSecond}
+          fps={30}
+          height={1080}
+          durationInFrames={90}
           width={1920}
         />
       </Folder>
@@ -156,6 +165,9 @@ export const RemotionRoot = () => {
           height={1080}
           durationInFrames={120}
           width={1920}
+          defaultProps={{
+            useMotionPush: true,
+          }}
         />
         <Composition
           id="BigFontSize"

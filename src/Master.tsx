@@ -11,6 +11,7 @@ import { DecodeCloseUpTwo } from "./DepixelationThreeD/DecodeCloseUpTwo";
 import { ThreeDGrid } from "./3DGrid/ThreeDGrid";
 import { Cover } from "./Cover";
 import { TransitionSeries } from "@remotion/transitions";
+import { ThreeDGridSecond } from "./3DGrid/ThreeDGridSecond";
 
 export const Master: React.FC = () => {
   return (
@@ -20,16 +21,14 @@ export const Master: React.FC = () => {
         <TransitionSeries.Sequence durationInFrames={60}>
           <Characters />
         </TransitionSeries.Sequence>
-        <TransitionSeries.Sequence durationInFrames={60}>
+        <TransitionSeries.Sequence durationInFrames={70}>
           <ThreeDGrid />
         </TransitionSeries.Sequence>
         <TransitionSeries.Sequence durationInFrames={60}>
           <CharactersAlt />
         </TransitionSeries.Sequence>
-        <TransitionSeries.Sequence durationInFrames={90}>
-          <Sequence from={-60}>
-            <ThreeDGrid />
-          </Sequence>
+        <TransitionSeries.Sequence durationInFrames={80}>
+          <ThreeDGridSecond />
         </TransitionSeries.Sequence>
         <TransitionSeries.Sequence durationInFrames={60}>
           <DecodeCloseUpTwo useMotionPush={false} />
