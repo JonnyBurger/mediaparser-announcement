@@ -32,23 +32,21 @@ export const Master: React.FC = () => {
           </Sequence>
         </TransitionSeries.Sequence>
         <TransitionSeries.Sequence durationInFrames={60}>
-          <DecodeCloseUpTwo />
+          <DecodeCloseUpTwo useMotionPush={false} />
         </TransitionSeries.Sequence>
         <TransitionSeries.Sequence durationInFrames={90}>
           <AudioVisFirstScene />
         </TransitionSeries.Sequence>
         <TransitionSeries.Sequence durationInFrames={55}>
           <Sequence from={-50}>
-            <DecodeCloseUpTwo />
+            <DecodeCloseUpTwo useMotionPush={true} />
           </Sequence>
         </TransitionSeries.Sequence>
         <TransitionSeries.Sequence durationInFrames={60}>
           <AudioVisIntermediateScene />
         </TransitionSeries.Sequence>
         <TransitionSeries.Sequence durationInFrames={70}>
-          <Sequence>
-            <DecodeCloseUp />
-          </Sequence>
+          <DecodeCloseUp />
         </TransitionSeries.Sequence>
         <TransitionSeries.Sequence durationInFrames={210}>
           <AudioVisSecondScene />

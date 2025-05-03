@@ -19,10 +19,13 @@ import {
 import { DecodeScene } from "./DecodeScene";
 import { visualControl } from "@remotion/studio";
 import { z } from "zod";
+import { useMotionPushEnd, useMotionPushStart } from "../use-motion-push";
 
 export const DecodeCloseUp: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const motionPush = useMotionPushStart();
+  const motionPushEnd = useMotionPushEnd();
 
   const motion = spring({
     frame,
@@ -67,7 +70,7 @@ export const DecodeCloseUp: React.FC = () => {
             <RotateZ radians={rotateZ}>
               <RotateY radians={0}>
                 <RotateX radians={-Math.PI / 3}>
-                  <Scale factor={scale}>
+                  <Scale factor={scale * motionPush - motionPushEnd * 2}>
                     <DecodeScene src={staticFile("SlowDissolve.mp4")} />
                   </Scale>
                 </RotateX>

@@ -16,8 +16,12 @@ import {
 } from "@remotion/animation-utils";
 import { takeOffSpeedFunction } from "../remap-speed";
 import { AudioVisTrack } from "./AudioVisTrack";
+import { useMotionPushEnd, useMotionPushStart } from "../use-motion-push";
 
-export const AudioVisIntermediateSceneInternal: React.FC = () => {
+export const AudioVisIntermediateSceneInternal: React.FC<{
+  transitionStart: number;
+  transitionEnd: number;
+}> = ({ transitionStart: transitionStart, transitionEnd: transitionEnd }) => {
   const { fps, height } = useVideoConfig();
   const frame = useCurrentFrame();
 
@@ -42,9 +46,9 @@ export const AudioVisIntermediateSceneInternal: React.FC = () => {
             transform: makeTransform([
               perspective(1000),
               translateX(900),
-              scale(2.4 - scaled),
+              scale(2.4 - scaled + (1 - transitionStart) * 4),
               translateX(150 + progress),
-              rotateY(40),
+              rotateY(40 - transitionEnd * 20),
             ]),
             willChange: "transform",
           }}
@@ -55,9 +59,15 @@ export const AudioVisIntermediateSceneInternal: React.FC = () => {
 };
 
 export const AudioVisIntermediateScene: React.FC = () => {
+  const motion = useMotionPushStart();
+  const motionPush = useMotionPushEnd();
+
   return (
     <Sequence from={-106}>
-      <AudioVisIntermediateSceneInternal />
+      <AudioVisIntermediateSceneInternal
+        transitionStart={motion}
+        transitionEnd={motionPush}
+      />
     </Sequence>
   );
 };

@@ -20,8 +20,11 @@ import { visualControl } from "@remotion/studio";
 import { z } from "zod";
 import { doFlip } from "./do-flip";
 import { MediaParserSign } from "../MediaParserSign/MediaParserSign";
+import { useMotionPushStart } from "../use-motion-push";
 
-const AudioVisSecondSceneInternal: React.FC = () => {
+const AudioVisSecondSceneInternal: React.FC<{
+  motionPush: number;
+}> = ({ motionPush }) => {
   const { height, fps } = useVideoConfig();
   const frame = useCurrentFrame();
 
@@ -73,7 +76,10 @@ const AudioVisSecondSceneInternal: React.FC = () => {
                 ),
               ),
               rotateX(rotX, "rad"),
-              scale(visualControl("scale", 1, z.number().step(0.01))),
+              scale(
+                visualControl("scale", 1, z.number().step(0.01)) +
+                  3 * (1 - motionPush),
+              ),
             ]),
             willChange: "transform",
           }}
@@ -84,9 +90,10 @@ const AudioVisSecondSceneInternal: React.FC = () => {
 };
 
 export const AudioVisSecondScene: React.FC = () => {
+  const motionPush = useMotionPushStart();
   return (
-    <Sequence from={-30}>
-      <AudioVisSecondSceneInternal />
+    <Sequence from={-35}>
+      <AudioVisSecondSceneInternal motionPush={motionPush} />
     </Sequence>
   );
 };

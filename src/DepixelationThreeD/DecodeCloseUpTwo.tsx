@@ -19,10 +19,15 @@ import {
 import { DecodeScene } from "./DecodeScene";
 import { visualControl } from "@remotion/studio";
 import { z } from "zod";
+import { useMotionPushEnd } from "../use-motion-push";
 
-export const DecodeCloseUpTwo: React.FC = () => {
+export const DecodeCloseUpTwo: React.FC<{
+  useMotionPush: boolean;
+}> = ({ useMotionPush }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+
+  const motionPush = useMotionPushEnd() * (useMotionPush ? 1 : 0);
 
   const motion =
     spring({
@@ -76,7 +81,7 @@ export const DecodeCloseUpTwo: React.FC = () => {
               <RotateZ radians={rotateZ}>
                 <RotateY radians={0}>
                   <RotateX radians={-Math.PI / 3}>
-                    <Scale factor={scale}>
+                    <Scale factor={scale - motionPush * 2}>
                       <DecodeScene src={staticFile("LayeredPixelation.mp4")} />
                     </Scale>
                   </RotateX>
