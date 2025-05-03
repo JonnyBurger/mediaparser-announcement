@@ -17,6 +17,7 @@ import { DepixelationThreeD } from "./DepixelationThreeD";
 import { DecodeScene } from "./DepixelationThreeD/DecodeScene";
 import { DecodeCloseUp } from "./DepixelationThreeD/DecodeCloseUp";
 import { AudioVisSecondScene } from "./Waveform/AudioVisSecondScene";
+import { Characters } from "./Characters/Characters";
 export const RemotionRoot = () => {
   return (
     <>
@@ -146,6 +147,16 @@ export const RemotionRoot = () => {
         <Composition
           id="DepixelationThreeD"
           component={DepixelationThreeD}
+          fps={30}
+          height={1080}
+          durationInFrames={30 * 30}
+          width={1920}
+        />
+      </Folder>
+      <Folder name="Characters">
+        <Composition
+          id="Characters"
+          component={Characters}
           fps={30}
           height={1080}
           durationInFrames={30 * 30}

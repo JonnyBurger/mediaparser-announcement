@@ -3,7 +3,7 @@ import { Flash } from "./Flash";
 import { COLUMNS, ROWS } from "./layout";
 import { HexCharacter } from "./HexCharacter";
 
-const randomHex = (seed: number) => {
+export const randomHex = (seed: number) => {
   return Math.floor(random(seed) * 16777215)
     .toString(16)
     .slice(0, 1)
