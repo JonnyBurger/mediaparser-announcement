@@ -11,7 +11,7 @@ export type Props = {
   themeColors: ThemeColors | null;
 };
 
-export const Main: React.FC<Props> = ({ steps, themeColors }) => {
+export const CodeAnimations: React.FC<Props> = ({ steps, themeColors }) => {
   if (!steps) {
     throw new Error("Steps are not defined");
   }

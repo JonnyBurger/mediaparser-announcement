@@ -1,5 +1,5 @@
-import { Composition, staticFile } from "remotion";
-import { Main } from "./Main";
+import { Composition, Folder, staticFile } from "remotion";
+import { CodeAnimations } from "./Main";
 import "./index.css";
 
 import { calculateMetadata } from "./calculate-metadata/calculate-metadata";
@@ -21,55 +21,62 @@ import { AudioVisSecondScene } from "./Waveform/AudioVisSecondScene";
 export const RemotionRoot = () => {
   return (
     <>
-      <Composition
-        id="Main"
-        component={Main}
-        defaultProps={{
-          steps: null,
-          themeColors: null,
-          theme: "github-dark" as const,
-          width: {
-            type: "fixed",
-            value: 1920,
-          },
-        }}
-        fps={30}
-        height={1080}
-        calculateMetadata={calculateMetadata}
-        schema={schema}
-      />
-      <Composition
-        id="Grid"
-        component={Grid}
-        fps={30}
-        height={HEIGHT}
-        durationInFrames={200}
-        width={1920}
-      />
-      <Composition
-        id="ThreeDGrid"
-        component={ThreeDGrid}
-        fps={30}
-        height={1080}
-        durationInFrames={200}
-        width={1920}
-      />
-      <Composition
-        id="WaveformFirstScene"
-        component={AudioVisFirstScene}
-        fps={30}
-        height={1080}
-        durationInFrames={500}
-        width={1920}
-      />
-      <Composition
-        id="WaveformSecondScene"
-        component={AudioVisSecondScene}
-        fps={30}
-        height={1080}
-        durationInFrames={500}
-        width={1920}
-      />
+      <Folder name="CodeAnimations">
+        <Composition
+          id="CodeAnimations"
+          component={CodeAnimations}
+          defaultProps={{
+            steps: null,
+            themeColors: null,
+            theme: "github-dark" as const,
+            width: {
+              type: "fixed",
+              value: 1920,
+            },
+          }}
+          fps={30}
+          height={1080}
+          calculateMetadata={calculateMetadata}
+          schema={schema}
+        />
+      </Folder>
+      <Folder name="1-Grid">
+        <Composition
+          id="Grid"
+          component={Grid}
+          fps={30}
+          height={HEIGHT}
+          durationInFrames={200}
+          width={1920}
+        />
+        <Composition
+          id="ThreeDGrid"
+          component={ThreeDGrid}
+          fps={30}
+          height={1080}
+          durationInFrames={200}
+          width={1920}
+        />
+      </Folder>
+      <Folder name="2-Waveform">
+        <Composition
+          id="WaveformFirstScene"
+          component={AudioVisFirstScene}
+          fps={30}
+          height={1080}
+          durationInFrames={500}
+          width={1920}
+        />
+        <Composition
+          id="WaveformSecondScene"
+          component={AudioVisSecondScene}
+          fps={30}
+          height={1080}
+          durationInFrames={500}
+          width={1920}
+        />
+      </Folder>
+
       <Composition
         id="MediaParserSign"
         component={MediaParserSign}
