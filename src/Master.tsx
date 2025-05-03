@@ -8,13 +8,17 @@ import { DepixelationThreeD } from "./DepixelationThreeD";
 import { DecodeCloseUp } from "./DepixelationThreeD/DecodeCloseUp";
 import { AudioVisSecondScene } from "./Waveform/AudioVisSecondScene";
 import { Characters } from "./Characters/Characters";
+import { CharactersAlt } from "./Characters/CharactersAlt";
 
 export const Master: React.FC = () => {
   return (
     <AbsoluteFill>
       <Audio src={staticFile("music.mp3")} />
-      <Sequence>
+      <Sequence durationInFrames={60}>
         <Characters />
+      </Sequence>
+      <Sequence durationInFrames={60} from={60}>
+        <CharactersAlt />
       </Sequence>
       <Sequence durationInFrames={120} from={120}>
         <ThreeDGrid />

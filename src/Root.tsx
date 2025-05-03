@@ -17,7 +17,8 @@ import { DepixelationThreeD } from "./DepixelationThreeD";
 import { DecodeScene } from "./DepixelationThreeD/DecodeScene";
 import { DecodeCloseUp } from "./DepixelationThreeD/DecodeCloseUp";
 import { AudioVisSecondScene } from "./Waveform/AudioVisSecondScene";
-import { Characters, CharactersAlt } from "./Characters/CharactersAlt";
+import { CharactersAlt } from "./Characters/CharactersAlt";
+import { Characters } from "./Characters/Characters";
 
 export const RemotionRoot = () => {
   return (
