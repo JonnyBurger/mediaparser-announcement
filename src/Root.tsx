@@ -76,7 +76,7 @@ export const RemotionRoot = () => {
           component={AudioVisIntermediateScene}
           fps={30}
           height={1080}
-          durationInFrames={500}
+          durationInFrames={70}
           width={1920}
         />
         <Composition

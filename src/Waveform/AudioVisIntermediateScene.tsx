@@ -17,7 +17,7 @@ import {
 import { takeOffSpeedFunction } from "../remap-speed";
 import { AudioVisTrack } from "./AudioVisTrack";
 
-export const AudioVisIntermediateScene: React.FC = () => {
+export const AudioVisIntermediateSceneInternal: React.FC = () => {
   const { fps, height } = useVideoConfig();
   const frame = useCurrentFrame();
 
@@ -37,6 +37,7 @@ export const AudioVisIntermediateScene: React.FC = () => {
     <AbsoluteFill className="bg-white">
       <Sequence height={height}>
         <AudioVisTrack
+          noNum
           style={{
             transform: makeTransform([
               perspective(1000),
@@ -50,5 +51,13 @@ export const AudioVisIntermediateScene: React.FC = () => {
         />
       </Sequence>
     </AbsoluteFill>
+  );
+};
+
+export const AudioVisIntermediateScene: React.FC = () => {
+  return (
+    <Sequence from={-106}>
+      <AudioVisIntermediateSceneInternal />
+    </Sequence>
   );
 };

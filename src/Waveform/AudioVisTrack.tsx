@@ -12,7 +12,8 @@ import { Waveform } from "./Waveform";
 export const AudioVisTrack: React.FC<{
   style: React.CSSProperties;
   noShrink?: boolean;
-}> = ({ style, noShrink }) => {
+  noNum?: boolean;
+}> = ({ style, noShrink, noNum }) => {
   const frame = useCurrentFrame();
   const { fps, height } = useVideoConfig();
 
@@ -37,13 +38,15 @@ export const AudioVisTrack: React.FC<{
       <AbsoluteFill style={style}>
         <Waveform width={width} height={height} strokeWidth={strokeWidth} />
       </AbsoluteFill>
-      <AbsoluteFill style={style}>
-        <div className="flex flex-row absolute h-full">
-          {waveform.slice(0, 32).map((y, i) => {
-            return <Num key={i} numWidth={numWidth} y={y} i={i} />;
-          })}
-        </div>
-      </AbsoluteFill>
+      {noNum ? null : (
+        <AbsoluteFill style={style}>
+          <div className="flex flex-row absolute h-full">
+            {waveform.slice(0, 32).map((y, i) => {
+              return <Num key={i} numWidth={numWidth} y={y} i={i} />;
+            })}
+          </div>
+        </AbsoluteFill>
+      )}
     </AbsoluteFill>
   );
 };

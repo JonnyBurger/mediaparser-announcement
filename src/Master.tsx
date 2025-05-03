@@ -20,7 +20,7 @@ export const Master: React.FC = () => {
         <Series.Sequence durationInFrames={60}>
           <Characters />
         </Series.Sequence>
-        <Series.Sequence durationInFrames={90}>
+        <Series.Sequence durationInFrames={60}>
           <ThreeDGrid />
         </Series.Sequence>
         <Series.Sequence durationInFrames={60}>
@@ -43,11 +43,9 @@ export const Master: React.FC = () => {
           </Sequence>
         </Series.Sequence>
         <Series.Sequence durationInFrames={60}>
-          <Sequence from={-106}>
-            <AudioVisIntermediateScene />
-          </Sequence>
+          <AudioVisIntermediateScene />
         </Series.Sequence>
-        <Series.Sequence durationInFrames={60}>
+        <Series.Sequence durationInFrames={70}>
           <Sequence>
             <DecodeCloseUp />
           </Sequence>
@@ -63,7 +61,7 @@ export const Master: React.FC = () => {
         <Series.Sequence durationInFrames={70}>
           <MediaParserSign lines={["npm i @remotion/media-parser"]} />
         </Series.Sequence>
-        <Series.Sequence durationInFrames={120}>
+        <Series.Sequence durationInFrames={120} offset={-20}>
           <OutTransition />
         </Series.Sequence>
       </Series>
