@@ -9,6 +9,7 @@ import {
 import { COLUMNS, HEIGHT, ROWS, WIDTH } from "./layout";
 import { HexCharacter } from "./HexCharacter";
 import { FlashLabel } from "./FlashLabel";
+import { randomHex } from "./Grid";
 
 export const Flash: React.FC<{
   content: string;
@@ -16,7 +17,15 @@ export const Flash: React.FC<{
   label: string;
   width: number;
   background?: string;
-}> = ({ content, offset, label, width, background = "#0B84F3" }) => {
+  actualContent?: boolean;
+}> = ({
+  content,
+  offset,
+  label,
+  width,
+  background = "#0B84F3",
+  actualContent,
+}) => {
   const column = offset % COLUMNS;
   const row = Math.floor(offset / COLUMNS);
   const { fps } = useVideoConfig();
@@ -64,7 +73,7 @@ export const Flash: React.FC<{
                 row={row}
                 scale={scale(i)}
               >
-                {content[i]}
+                {actualContent ? content[i] : randomHex(i + offset)}
               </HexCharacter>
             );
           })}

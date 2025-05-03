@@ -26,29 +26,68 @@ export const Grid = () => {
         })}
       </div>
       <Sequence from={3}>
-        <Flash content="1920" width={4} offset={41} label="width" />
+        <Flash
+          actualContent
+          content="1920"
+          width={4}
+          offset={41}
+          label="width"
+        />
       </Sequence>
       <Sequence from={30}>
-        <Flash content="1080" width={4} offset={66} label="height" />
+        <Flash
+          actualContent
+          content="1080"
+          width={4}
+          offset={66}
+          label="height"
+        />
       </Sequence>
       <Sequence from={45}>
-        <Flash content="30" width={2} offset={90} label="fps" />
+        <Flash actualContent content="30" width={2} offset={90} label="fps" />
       </Sequence>
-      <Sequence from={60}>
+      <Sequence from={52}>
         <Flash
           background="#8e44ad"
           content="10802160234902349"
           width={4}
           offset={144 - 16}
-          label="H.264 sample"
+          label="H.264 keyframe"
         />
       </Sequence>
-      <Sequence from={64}>
+      <Sequence from={58}>
         <Flash
           background="rgb(16 171 58)"
           content="1080216023490"
           width={4}
           offset={144 - 16 + 5}
+          label="AAC sample"
+        />
+      </Sequence>
+      <Sequence from={66}>
+        <Flash
+          background="#8e44ad"
+          content="10802160234902349"
+          width={5}
+          offset={154 - 16}
+          label="H.264 delta"
+        />
+      </Sequence>
+      <Sequence from={70}>
+        <Flash
+          background="#8e44ad"
+          content="1080216023490234alksjfaklsöf9"
+          width={7}
+          offset={240}
+          label="H.264 delta"
+        />
+      </Sequence>
+      <Sequence from={76}>
+        <Flash
+          background="rgb(16 171 58)"
+          content="10802160234902349"
+          width={8}
+          offset={240 + 8}
           label="AAC sample"
         />
       </Sequence>

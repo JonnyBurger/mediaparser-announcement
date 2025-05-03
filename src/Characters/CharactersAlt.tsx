@@ -29,18 +29,42 @@ export const CharactersAlt: React.FC = () => {
   const progress = interpolate(frame, [0, 100], [0, 1]);
   const constance = interpolate(progress, [0, 1], [-100, 100]);
 
-  const rotYStart = visualControl("rotateY-start", 0.12, z.number().step(0.01));
-  const rotYEnd = visualControl("rotateY-end", 0.19, z.number().step(0.01));
-  const rotXStart = visualControl("rotateX-start", 0.79, z.number().step(0.01));
-  const rotXEnd = visualControl("rotateX-end", 0.79, z.number().step(0.01));
-  const rotZStart = visualControl("rotateZ-start", 0.14, z.number().step(0.01));
-  const rotZEnd = visualControl("rotateZ-end", 0.14, z.number().step(0.01));
-  const scaleStart = visualControl("scale-start", 1.58, z.number().step(0.01));
-  const scaleEnd = visualControl("scale-end", 1.96, z.number().step(0.01));
-  const transXStart = visualControl("transX-start", -138, z.number().step(1));
-  const transXEnd = visualControl("transX-end", -1022, z.number().step(1));
-  const transYStart = visualControl("transY-start", -242, z.number().step(1));
-  const transYEnd = visualControl("transY-end", 14, z.number().step(1));
+  const rotYStart = visualControl(
+    "alt-rotateY-start",
+    0.12,
+    z.number().step(0.01),
+  );
+  const rotYEnd = visualControl("alt-rotateY-end", 0.19, z.number().step(0.01));
+  const rotXStart = visualControl(
+    "alt-rotateX-start",
+    0.79,
+    z.number().step(0.01),
+  );
+  const rotXEnd = visualControl("alt-rotateX-end", 0.79, z.number().step(0.01));
+  const rotZStart = visualControl(
+    "alt-rotateZ-start",
+    0.14,
+    z.number().step(0.01),
+  );
+  const rotZEnd = visualControl("alt-rotateZ-end", 0.14, z.number().step(0.01));
+  const scaleStart = visualControl(
+    "alt-scale-start",
+    1.58,
+    z.number().step(0.01),
+  );
+  const scaleEnd = visualControl("alt-scale-end", 1.96, z.number().step(0.01));
+  const transXStart = visualControl(
+    "alt-transX-start",
+    -138,
+    z.number().step(1),
+  );
+  const transXEnd = visualControl("alt-transX-end", -1022, z.number().step(1));
+  const transYStart = visualControl(
+    "alt-transY-start",
+    -242,
+    z.number().step(1),
+  );
+  const transYEnd = visualControl("alt-transY-end", 14, z.number().step(1));
 
   const rotY = interpolate(progress, [0, 1], [rotYStart, rotYEnd]);
   const rotX = interpolate(progress, [0, 1], [rotXStart, rotXEnd]);
