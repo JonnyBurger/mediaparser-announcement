@@ -12,11 +12,22 @@ export function applyStyle({
 }) {
   const { translateX, translateY, color, opacity } = keyframes;
 
+  console.log({
+    translateX,
+    translateY,
+    color,
+    opacity,
+  });
+
   if (opacity) {
     element.style.opacity = progress.toString();
   }
   if (color) {
-    element.style.color = interpolateColors(progress, [0, 1], color);
+    element.style.color = interpolateColors(
+      progress,
+      [0, 1],
+      color.map((c) => c || "transparent"),
+    );
   }
   const x = translateX ? interpolate(progress, [0, 1], translateX) : 0;
   const y = translateY ? interpolate(progress, [0, 1], translateY) : 0;
