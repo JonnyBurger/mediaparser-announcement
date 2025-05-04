@@ -44,7 +44,9 @@ const Tile: React.FC<{
   });
 
   const scaleOut = spring({
-    config: {},
+    config: {
+      damping: 200,
+    },
     reverse: true,
     delay: delay + 20,
     durationInFrames: 15,
@@ -64,7 +66,10 @@ const Tile: React.FC<{
     >
       <div
         style={{
-          backgroundColor: transparentize(1 - (op - 1 + scaleOut), "#0D1116"),
+          backgroundColor: transparentize(
+            1 - (op - 1 + Math.min(1, Math.max(scaleOut, 0))),
+            "#0D1116",
+          ),
         }}
         className="flex-1 text-white flex justify-center items-center text-3xl"
       >

@@ -24,6 +24,7 @@ import { DecodeCloseUpTwo } from "./DepixelationThreeD/DecodeCloseUpTwo";
 import { Cover } from "./Cover";
 import { ThreeDGridSecond } from "./3DGrid/ThreeDGridSecond";
 import { MediaParserEndCard } from "./MediaParserEndCard";
+import { LowerThird } from "./LowerThird";
 
 export const RemotionRoot = () => {
   return (
@@ -225,6 +226,17 @@ export const RemotionRoot = () => {
           durationInFrames={30 * 30}
         />
       </Folder>
+      <Composition
+        id="LowerThird"
+        component={LowerThird}
+        width={1920}
+        height={1080}
+        fps={30}
+        durationInFrames={30 * 30}
+        defaultProps={{
+          delay: 0,
+        }}
+      />
     </>
   );
 };
