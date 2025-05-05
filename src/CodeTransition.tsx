@@ -53,8 +53,9 @@ export function CodeTransition({
       config: {
         damping: 200,
       },
-      durationInFrames: 20,
-      delay: delay,
+      durationInFrames: 15,
+      delay: delay - 1,
+      durationRestThreshold: 0.001,
     });
 
   const endProgress = spring({
@@ -63,8 +64,9 @@ export function CodeTransition({
     config: {
       damping: 200,
     },
-    durationInFrames: 20,
-    delay: durationInFrames - 20,
+    durationInFrames: 15,
+    delay: durationInFrames - 9,
+    durationRestThreshold: 0.001,
   });
 
   useLayoutEffect(() => {
