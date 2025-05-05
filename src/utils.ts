@@ -13,7 +13,7 @@ export function applyStyle({
   const { translateX, translateY, color, opacity } = keyframes;
 
   if (opacity) {
-    element.style.opacity = progress.toString();
+    element.style.opacity = interpolate(progress, [0, 1], opacity).toString();
   }
   if (color) {
     element.style.color = interpolateColors(progress, [0, 1], color);

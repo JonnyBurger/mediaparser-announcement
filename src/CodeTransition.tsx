@@ -1,12 +1,11 @@
 import { AbsoluteFill, interpolate, spring, useVideoConfig } from "remotion";
 import { continueRender, delayRender, useCurrentFrame } from "remotion";
 import { Pre, HighlightedCode, AnnotationHandler } from "codehike/code";
-import React, { useEffect, useLayoutEffect, useMemo, useState } from "react";
+import React, { useLayoutEffect, useMemo } from "react";
 
 import {
   calculateTransitions,
   getStartingSnapshot,
-  TokenTransitionsSnapshot,
 } from "codehike/utils/token-transitions";
 import { applyStyle } from "./utils";
 import { callout } from "./annotations/Callout";
@@ -27,11 +26,12 @@ export function CodeTransition({
   readonly nextCode: HighlightedCode | null;
 }) {
   const frame = useCurrentFrame();
-  const { height, fps } = useVideoConfig();
+  const { height, fps, durationInFrames } = useVideoConfig();
 
-  const ref = React.useRef<HTMLPreElement>(null);
-  const [oldSnapshot, setOldSnapshot] =
-    useState<TokenTransitionsSnapshot | null>(null);
+  const previousRef = React.useRef<HTMLPreElement>(null);
+  const currentRef = React.useRef<HTMLPreElement>(null);
+  const nextRef = React.useRef<HTMLPreElement>(null);
+
   const [handle] = React.useState(() => delayRender());
 
   const prevCode: HighlightedCode = useMemo(() => {
@@ -43,8 +43,8 @@ export function CodeTransition({
   }, [currentCode, nextCode]);
 
   const code = useMemo(() => {
-    return oldSnapshot ? currentCode : prevCode;
-  }, [currentCode, prevCode, oldSnapshot]);
+    return currentCode;
+  }, [currentCode]);
 
   const progress = (delay: number) =>
     spring({
@@ -57,27 +57,51 @@ export function CodeTransition({
       delay: delay,
     });
 
-  useEffect(() => {
-    if (!oldSnapshot) {
-      setOldSnapshot(getStartingSnapshot(ref.current!));
-    }
-  }, [oldSnapshot]);
+  const endProgress = spring({
+    frame,
+    fps,
+    config: {
+      damping: 200,
+    },
+    durationInFrames: 20,
+    delay: durationInFrames - 20,
+  });
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useLayoutEffect(() => {
-    if (!oldSnapshot) {
-      setOldSnapshot(getStartingSnapshot(ref.current!));
-      return;
-    }
+    const oldSnapshot = getStartingSnapshot(previousRef.current!);
 
-    const transitions = calculateTransitions(ref.current!, oldSnapshot);
+    const transitionFromPrevious = calculateTransitions(
+      currentRef.current!,
+      oldSnapshot,
+    );
 
-    transitions.forEach(({ element, keyframes, options }) => {
-      applyStyle({
-        element,
-        keyframes,
-        progress: progress(options.fill === "both" ? 10 : 0),
-      });
+    transitionFromPrevious.forEach(({ element, keyframes, options }) => {
+      if (endProgress === 0) {
+        applyStyle({
+          element,
+          keyframes,
+          progress: progress(options.fill === "both" ? 10 : 0),
+        });
+      }
+    });
+
+    const transitionToNext = calculateTransitions(
+      currentRef.current!,
+      getStartingSnapshot(nextRef.current!),
+    );
+
+    transitionToNext.forEach(({ element, keyframes, options }) => {
+      if (options.fill === "both" && endProgress > 0) {
+        applyStyle({
+          element,
+          keyframes: {
+            opacity: keyframes.opacity
+              ? (keyframes.opacity.slice().reverse() as [number, number])
+              : undefined,
+          },
+          progress: endProgress,
+        });
+      }
     });
     continueRender(handle);
   });
@@ -123,7 +147,12 @@ export function CodeTransition({
             opacity: 0,
           }}
         >
-          <Pre ref={ref} code={prevCode} handlers={handlers} style={style} />
+          <Pre
+            ref={previousRef}
+            code={prevCode}
+            handlers={handlers}
+            style={style}
+          />
         </AbsoluteFill>
         <AbsoluteFill
           style={{
@@ -131,7 +160,7 @@ export function CodeTransition({
             paddingLeft: PADDING_X,
           }}
         >
-          <Pre ref={ref} code={code} handlers={handlers} style={style} />
+          <Pre ref={currentRef} code={code} handlers={handlers} style={style} />
         </AbsoluteFill>
         <AbsoluteFill
           style={{
@@ -140,7 +169,7 @@ export function CodeTransition({
             opacity: 0,
           }}
         >
-          <Pre ref={ref} code={nexCode} handlers={handlers} style={style} />
+          <Pre ref={nextRef} code={nexCode} handlers={handlers} style={style} />
         </AbsoluteFill>
       </div>
     </AbsoluteFill>
