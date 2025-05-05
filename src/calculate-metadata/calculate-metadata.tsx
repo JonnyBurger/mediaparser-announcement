@@ -37,13 +37,16 @@ export const calculateMetadata: CalculateMetadataFunction<
   );
   const codeWidth = widthPerCharacter * maxCharacters;
 
-  const defaultStepDuration = 90;
-
   const themeColors = await getThemeColors(props.theme);
 
-  const twoSlashedCode: HighlightedCode[] = [];
+  const twoSlashedCode: (HighlightedCode & {
+    durationInFrames: number;
+  })[] = [];
   for (const snippet of contents) {
-    twoSlashedCode.push(await processSnippet(snippet, props.theme));
+    twoSlashedCode.push({
+      ...(await processSnippet(snippet, props.theme)),
+      durationInFrames: snippet.durationInFrames,
+    });
   }
 
   const naturalWidth = codeWidth + horizontalPadding * 2;
@@ -53,7 +56,10 @@ export const calculateMetadata: CalculateMetadataFunction<
   const minimumWidthApplied = Math.max(minimumWidth, divisibleByTwo);
 
   return {
-    durationInFrames: contents.length * defaultStepDuration,
+    durationInFrames: contents.reduce(
+      (acc, curr) => acc + curr.durationInFrames,
+      0,
+    ),
     width:
       props.width.type === "fixed"
         ? Math.max(minimumWidthApplied, props.width.value)

@@ -31,7 +31,7 @@ export const RemotionRoot = () => {
     <>
       <Folder name="CodeAnimations">
         <Composition
-          id="CodeAnimations"
+          id="Metadata"
           component={CodeAnimations}
           defaultProps={{
             steps: null,

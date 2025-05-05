@@ -1,4 +1,4 @@
-import { AbsoluteFill, Sequence, Series, useVideoConfig } from "remotion";
+import { AbsoluteFill, Sequence, Series } from "remotion";
 import { CodeTransition } from "./CodeTransition";
 import { HighlightedCode } from "codehike/code";
 import { ThemeColors, ThemeProvider } from "./calculate-metadata/theme";
@@ -7,7 +7,7 @@ import { RefreshOnCodeChange } from "./ReloadOnCodeChange";
 import { verticalPadding } from "./font";
 
 export type Props = {
-  steps: HighlightedCode[] | null;
+  steps: (HighlightedCode & { durationInFrames: number })[] | null;
   themeColors: ThemeColors | null;
 };
 
@@ -15,9 +15,6 @@ export const CodeAnimations: React.FC<Props> = ({ steps, themeColors }) => {
   if (!steps) {
     throw new Error("Steps are not defined");
   }
-
-  const { durationInFrames } = useVideoConfig();
-  const stepDuration = durationInFrames / steps.length;
 
   if (!themeColors) {
     throw new Error("Theme colors are not defined");
@@ -55,7 +52,7 @@ export const CodeAnimations: React.FC<Props> = ({ steps, themeColors }) => {
                 <Series.Sequence
                   key={index}
                   layout="none"
-                  durationInFrames={stepDuration}
+                  durationInFrames={step.durationInFrames}
                   name={step.meta}
                 >
                   <CodeTransition
