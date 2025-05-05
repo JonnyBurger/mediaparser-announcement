@@ -61,6 +61,7 @@ export const CodeAnimations: React.FC<Props> = ({ steps, themeColors }) => {
                   <CodeTransition
                     previousCode={steps[index - 1]}
                     currentCode={step}
+                    nextCode={steps[index + 1]}
                   />
                 </Series.Sequence>
               ))}

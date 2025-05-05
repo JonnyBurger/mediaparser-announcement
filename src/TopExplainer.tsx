@@ -1,6 +1,6 @@
 import { fontSize } from "./font";
 
-export const PADDDING_X = 83;
+export const PADDING_X = 83;
 export const TOP_EXPLAINER_HEIGHT = 100;
 
 export const TopExplainer: React.FC = () => {

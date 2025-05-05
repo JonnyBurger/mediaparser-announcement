@@ -15,14 +15,16 @@ import { tokenTransitions } from "./annotations/InlineToken";
 import { errorInline, errorMessage } from "./annotations/Error";
 import { fontFamily, fontSize, lineHeight, tabSize } from "./font";
 import { getTextDimensions } from "./calculate-metadata/get-text-dimensions";
-import { PADDDING_X, TOP_EXPLAINER_HEIGHT, TopExplainer } from "./TopExplainer";
+import { PADDING_X, TOP_EXPLAINER_HEIGHT, TopExplainer } from "./TopExplainer";
 
 export function CodeTransition({
   previousCode,
   currentCode,
+  nextCode,
 }: {
   readonly previousCode: HighlightedCode | null;
   readonly currentCode: HighlightedCode;
+  readonly nextCode: HighlightedCode | null;
 }) {
   const frame = useCurrentFrame();
   const { height, fps } = useVideoConfig();
@@ -35,6 +37,10 @@ export function CodeTransition({
   const prevCode: HighlightedCode = useMemo(() => {
     return previousCode || { ...currentCode, tokens: [], annotations: [] };
   }, [currentCode, previousCode]);
+
+  const nexCode: HighlightedCode = useMemo(() => {
+    return nextCode || { ...currentCode, tokens: [], annotations: [] };
+  }, [currentCode, nextCode]);
 
   const code = useMemo(() => {
     return oldSnapshot ? currentCode : prevCode;
@@ -104,8 +110,38 @@ export function CodeTransition({
   return (
     <AbsoluteFill>
       <TopExplainer />
-      <div style={{ flex: 1, paddingTop: paddingY, paddingLeft: PADDDING_X }}>
-        <Pre ref={ref} code={code} handlers={handlers} style={style} />
+      <div
+        style={{
+          flex: 1,
+          position: "relative",
+        }}
+      >
+        <AbsoluteFill
+          style={{
+            paddingTop: paddingY,
+            paddingLeft: PADDING_X,
+            opacity: 0,
+          }}
+        >
+          <Pre ref={ref} code={prevCode} handlers={handlers} style={style} />
+        </AbsoluteFill>
+        <AbsoluteFill
+          style={{
+            paddingTop: paddingY,
+            paddingLeft: PADDING_X,
+          }}
+        >
+          <Pre ref={ref} code={code} handlers={handlers} style={style} />
+        </AbsoluteFill>
+        <AbsoluteFill
+          style={{
+            paddingTop: paddingY,
+            paddingLeft: PADDING_X,
+            opacity: 0,
+          }}
+        >
+          <Pre ref={ref} code={nexCode} handlers={handlers} style={style} />
+        </AbsoluteFill>
       </div>
     </AbsoluteFill>
   );
