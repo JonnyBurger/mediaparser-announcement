@@ -1,9 +1,12 @@
+import React from "react";
 import { fontSize } from "./font";
 
 export const PADDING_X = 83;
 export const TOP_EXPLAINER_HEIGHT = 100;
 
-export const TopExplainer: React.FC = () => {
+export const TopExplainer: React.FC<{
+  children: React.ReactNode;
+}> = ({ children }) => {
   return (
     <div
       style={{
@@ -19,7 +22,7 @@ export const TopExplainer: React.FC = () => {
         textAlign: "center",
       }}
     >
-      Getting Video Metadata
+      {children}
     </div>
   );
 };

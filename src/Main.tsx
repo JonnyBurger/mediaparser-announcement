@@ -9,9 +9,14 @@ import { verticalPadding } from "./font";
 export type Props = {
   steps: (HighlightedCode & { durationInFrames: number })[] | null;
   themeColors: ThemeColors | null;
+  topExplainerContent: React.ReactNode;
 };
 
-export const CodeAnimations: React.FC<Props> = ({ steps, themeColors }) => {
+export const CodeAnimations: React.FC<Props> = ({
+  steps,
+  themeColors,
+  topExplainerContent,
+}) => {
   if (!steps) {
     throw new Error("Steps are not defined");
   }
@@ -23,11 +28,11 @@ export const CodeAnimations: React.FC<Props> = ({ steps, themeColors }) => {
   const style: React.CSSProperties = useMemo(() => {
     return {
       padding: `${verticalPadding}px 0px`,
-      backgroundColor: themeColors.background,
+      backgroundColor: "#191A1C",
       position: "relative",
       borderLeft: "2px solid rgba(255, 255, 255, 0.1)",
     };
-  }, [themeColors.background]);
+  }, []);
 
   return (
     <ThemeProvider themeColors={themeColors}>
@@ -59,6 +64,7 @@ export const CodeAnimations: React.FC<Props> = ({ steps, themeColors }) => {
                     previousCode={steps[index - 1]}
                     currentCode={step}
                     nextCode={steps[index + 1]}
+                    topExplainerContent={topExplainerContent}
                   />
                 </Series.Sequence>
               ))}

@@ -41,6 +41,79 @@ export const RemotionRoot = () => {
               type: "fixed",
               value: 1920,
             },
+            topExplainerContent: "Getting Video Metadata",
+          }}
+          fps={30}
+          height={1080}
+          calculateMetadata={calculateMetadata}
+          schema={schema}
+        />
+        <Composition
+          id="Samples"
+          component={CodeAnimations}
+          defaultProps={{
+            steps: null,
+            themeColors: null,
+            theme: "github-dark" as const,
+            width: {
+              type: "fixed",
+              value: 1920,
+            },
+            topExplainerContent: "Extracting samples",
+          }}
+          fps={30}
+          height={1080}
+          calculateMetadata={calculateMetadata}
+          schema={schema}
+        />
+        <Composition
+          id="Decoder"
+          component={CodeAnimations}
+          defaultProps={{
+            steps: null,
+            themeColors: null,
+            theme: "github-dark" as const,
+            width: {
+              type: "fixed",
+              value: 1920,
+            },
+            topExplainerContent: "WebCodecs API",
+          }}
+          fps={30}
+          height={1080}
+          calculateMetadata={calculateMetadata}
+          schema={schema}
+        />
+        <Composition
+          id="Webcodecs"
+          component={CodeAnimations}
+          defaultProps={{
+            steps: null,
+            themeColors: null,
+            theme: "github-dark" as const,
+            width: {
+              type: "fixed",
+              value: 1920,
+            },
+            topExplainerContent: "WebCodecs API",
+          }}
+          fps={30}
+          height={1080}
+          calculateMetadata={calculateMetadata}
+          schema={schema}
+        />
+        <Composition
+          id="Async"
+          component={CodeAnimations}
+          defaultProps={{
+            steps: null,
+            themeColors: null,
+            theme: "github-dark" as const,
+            width: {
+              type: "fixed",
+              value: 1920,
+            },
+            topExplainerContent: "Controller API",
           }}
           fps={30}
           height={1080}

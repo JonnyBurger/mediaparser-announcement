@@ -20,10 +20,12 @@ export function CodeTransition({
   previousCode,
   currentCode,
   nextCode,
+  topExplainerContent,
 }: {
   readonly previousCode: HighlightedCode | null;
   readonly currentCode: HighlightedCode;
   readonly nextCode: HighlightedCode | null;
+  readonly topExplainerContent: React.ReactNode;
 }) {
   const frame = useCurrentFrame();
   const { height, fps, durationInFrames } = useVideoConfig();
@@ -119,7 +121,8 @@ export function CodeTransition({
     [0, 1],
     [oldDimensions.height, newDimensions.height],
   );
-  const paddingY = (height - interpolatedHeight) / 2 - TOP_EXPLAINER_HEIGHT / 2;
+  const paddingY =
+    (height - interpolatedHeight) / 2 - (TOP_EXPLAINER_HEIGHT / 3) * 2;
 
   const style: React.CSSProperties = useMemo(() => {
     return {
@@ -135,7 +138,7 @@ export function CodeTransition({
 
   return (
     <AbsoluteFill>
-      <TopExplainer />
+      <TopExplainer>{topExplainerContent}</TopExplainer>
       <div
         style={{
           flex: 1,
