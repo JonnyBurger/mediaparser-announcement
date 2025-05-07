@@ -37,7 +37,7 @@ const Char: React.FC<{
   const backgroundColor = interpolateColors(
     anim,
     [0, 0.01, 0.6, 0.61],
-    ["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 1)", "white", "white"],
+    ["rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 1)", "#f8fafc", "#f8fafc"],
   );
   const color = interpolateColors(
     anim,

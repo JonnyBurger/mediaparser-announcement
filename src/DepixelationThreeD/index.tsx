@@ -16,7 +16,7 @@ export const DepixelationThreeD: React.FC = () => {
   const rotateY = 10 / 20;
 
   return (
-    <AbsoluteFill className="bg-white flex justify-center items-center">
+    <AbsoluteFill className="bg-background flex justify-center items-center">
       <Scale
         factor={interpolate(frame, [0, 20], [1.1, 1], {
           extrapolateLeft: "clamp",

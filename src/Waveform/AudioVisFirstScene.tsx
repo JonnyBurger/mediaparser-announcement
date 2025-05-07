@@ -34,7 +34,7 @@ export const AudioVisFirstScene: React.FC = () => {
   const progress = interpolate(speed, [0, 1000], [0, -1500], {});
 
   return (
-    <AbsoluteFill className="bg-white">
+    <AbsoluteFill className="bg-background">
       <Sequence height={height}>
         <AudioVisTrack
           style={{

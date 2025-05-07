@@ -12,7 +12,7 @@ export const randomHex = (seed: number) => {
 
 export const Grid = () => {
   return (
-    <AbsoluteFill className="bg-white">
+    <AbsoluteFill>
       <div className="grid grid-cols-16 grid-rows-9">
         {Array.from({ length: COLUMNS * ROWS }).map((_, index) => {
           const column = index % COLUMNS;

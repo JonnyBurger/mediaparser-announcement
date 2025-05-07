@@ -36,10 +36,10 @@ export const RemotionRoot = () => {
           defaultProps={{
             steps: null,
             themeColors: null,
-            theme: "github-dark" as const,
+            theme: "github-light" as const,
             width: {
               type: "fixed",
-              value: 1920,
+              value: 1044,
             },
             topExplainerContent: "Getting Video Metadata",
           }}
@@ -54,10 +54,10 @@ export const RemotionRoot = () => {
           defaultProps={{
             steps: null,
             themeColors: null,
-            theme: "github-dark" as const,
+            theme: "github-light" as const,
             width: {
               type: "fixed",
-              value: 1920,
+              value: 1044,
             },
             topExplainerContent: "Extracting samples",
           }}
@@ -72,10 +72,10 @@ export const RemotionRoot = () => {
           defaultProps={{
             steps: null,
             themeColors: null,
-            theme: "github-dark" as const,
+            theme: "github-light" as const,
             width: {
               type: "fixed",
-              value: 1920,
+              value: 1044,
             },
             topExplainerContent: "WebCodecs API",
           }}
@@ -90,10 +90,10 @@ export const RemotionRoot = () => {
           defaultProps={{
             steps: null,
             themeColors: null,
-            theme: "github-dark" as const,
+            theme: "github-light" as const,
             width: {
               type: "fixed",
-              value: 1920,
+              value: 1044,
             },
             topExplainerContent: "WebCodecs API",
           }}
@@ -108,12 +108,48 @@ export const RemotionRoot = () => {
           defaultProps={{
             steps: null,
             themeColors: null,
-            theme: "github-dark" as const,
+            theme: "github-light" as const,
+            width: {
+              type: "fixed",
+              value: 1044,
+            },
+            topExplainerContent: "Controllers",
+          }}
+          fps={30}
+          height={1080}
+          calculateMetadata={calculateMetadata}
+          schema={schema}
+        />
+        <Composition
+          id="Callbacks"
+          component={CodeAnimations}
+          defaultProps={{
+            steps: null,
+            themeColors: null,
+            theme: "github-light" as const,
+            width: {
+              type: "fixed",
+              value: 1044,
+            },
+            topExplainerContent: "Callbacks",
+          }}
+          fps={30}
+          height={1080}
+          calculateMetadata={calculateMetadata}
+          schema={schema}
+        />
+        <Composition
+          id="Worker"
+          component={CodeAnimations}
+          defaultProps={{
+            steps: null,
+            themeColors: null,
+            theme: "github-light" as const,
             width: {
               type: "fixed",
               value: 1920,
             },
-            topExplainerContent: "Controller API",
+            topExplainerContent: "Workers",
           }}
           fps={30}
           height={1080}

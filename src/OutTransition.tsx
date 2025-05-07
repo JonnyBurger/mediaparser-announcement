@@ -48,7 +48,7 @@ const Tile: React.FC<{
       damping: 200,
     },
     reverse: true,
-    delay: delay + 20,
+    delay: delay + 12,
     durationInFrames: 15,
     frame,
     fps: 30,
@@ -73,7 +73,9 @@ const Tile: React.FC<{
         }}
         className="flex-1 text-white flex justify-center items-center text-3xl"
       >
-        <span style={{ scale: op + scaleOut - 1, display: "block" }}>
+        <span
+          style={{ scale: op + scaleOut - 1, display: "block", opacity: 0.4 }}
+        >
           {Math.floor(random(index) * 16)
             .toString(16)
             .toUpperCase()}

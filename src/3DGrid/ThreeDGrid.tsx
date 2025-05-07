@@ -96,9 +96,9 @@ export const ThreeDGrid = () => {
 
   return (
     <AbsoluteFill
-      className="bg-white"
       style={{
         perspective: 2000,
+        backgroundColor: "#F8FAFC",
       }}
     >
       <AbsoluteFill

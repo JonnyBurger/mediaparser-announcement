@@ -10,10 +10,10 @@ export const TopExplainer: React.FC<{
   return (
     <div
       style={{
-        color: "white",
+        color: "#080D15",
         fontFamily: "GT Planar",
         height: 100,
-        borderBottom: "2px solid rgba(255, 255, 255, 0.1)",
+        borderBottom: "2px solid rgba(0, 0, 0, 0.1)",
         fontSize: fontSize,
         display: "flex",
         alignItems: "center",

@@ -6,13 +6,7 @@ import { schema } from "./schema";
 import { processSnippet } from "./process-snippet";
 import { getFiles } from "./get-files";
 import { measureText } from "@remotion/layout-utils";
-import {
-  fontFamily,
-  fontSize,
-  horizontalPadding,
-  tabSize,
-  waitUntilDone,
-} from "../font";
+import { fontFamily, fontSize, tabSize, waitUntilDone } from "../font";
 import { HighlightedCode } from "codehike/code";
 
 export const calculateMetadata: CalculateMetadataFunction<
@@ -49,21 +43,12 @@ export const calculateMetadata: CalculateMetadataFunction<
     });
   }
 
-  const naturalWidth = codeWidth + horizontalPadding * 2;
-  const divisibleByTwo = Math.ceil(naturalWidth / 2) * 2; // MP4 requires an even width
-
-  const minimumWidth = props.width.type === "fixed" ? 0 : 1080;
-  const minimumWidthApplied = Math.max(minimumWidth, divisibleByTwo);
-
   return {
     durationInFrames: contents.reduce(
       (acc, curr) => acc + curr.durationInFrames,
       0,
     ),
-    width:
-      props.width.type === "fixed"
-        ? Math.max(minimumWidthApplied, props.width.value)
-        : minimumWidthApplied,
+    width: 1920,
     props: {
       theme: props.theme,
       width: props.width,

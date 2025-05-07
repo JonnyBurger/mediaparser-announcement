@@ -14,10 +14,10 @@ export const FlashLabel: React.FC<{
 
   return (
     <div
+      className="bg-background"
       style={{
         height: HEIGHT / ROWS,
         width: (WIDTH / COLUMNS) * tileWidth,
-        backgroundColor: "#fff",
         position: "absolute",
         top: -(HEIGHT / ROWS),
         left: 0,

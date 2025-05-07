@@ -5,7 +5,7 @@ export const MediaParserSign: React.FC<{
   lines: string[];
 }> = ({ lines }) => {
   return (
-    <AbsoluteFill className="absolute flex justify-center items-center bg-white">
+    <AbsoluteFill className="absolute flex justify-center items-center bg-background">
       <div
         style={{
           scale: 1.5,

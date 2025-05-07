@@ -41,7 +41,7 @@ const AudioVisSecondSceneInternal: React.FC<{
 
   if (rotX >= Math.PI / 2 - 0.03) {
     return (
-      <Sequence from={115} className="bg-white">
+      <Sequence from={115} className="bg-background">
         <AbsoluteFill
           style={{
             transform: makeTransform([
@@ -57,7 +57,7 @@ const AudioVisSecondSceneInternal: React.FC<{
   }
 
   return (
-    <AbsoluteFill className="bg-white">
+    <AbsoluteFill className="bg-background">
       <Sequence height={height} from={-120}>
         <AudioVisTrack
           noShrink

@@ -10,12 +10,17 @@ export type Props = {
   steps: (HighlightedCode & { durationInFrames: number })[] | null;
   themeColors: ThemeColors | null;
   topExplainerContent: React.ReactNode;
+  width: {
+    type: "fixed";
+    value: number;
+  };
 };
 
 export const CodeAnimations: React.FC<Props> = ({
   steps,
   themeColors,
   topExplainerContent,
+  width,
 }) => {
   if (!steps) {
     throw new Error("Steps are not defined");
@@ -28,11 +33,11 @@ export const CodeAnimations: React.FC<Props> = ({
   const style: React.CSSProperties = useMemo(() => {
     return {
       padding: `${verticalPadding}px 0px`,
-      backgroundColor: "#191A1C",
+      backgroundColor: "#F8FAFC",
       position: "relative",
-      borderLeft: "2px solid rgba(255, 255, 255, 0.1)",
+      borderLeft: width.value > 1044 ? "none" : "2px solid rgba(0, 0, 0, 0.1)",
     };
-  }, []);
+  }, [width.value]);
 
   return (
     <ThemeProvider themeColors={themeColors}>
@@ -44,7 +49,7 @@ export const CodeAnimations: React.FC<Props> = ({
           justifyContent: "flex-end",
         }}
       >
-        <Sequence width={1044} height={1080} style={style}>
+        <Sequence width={width.value} height={1080} style={style}>
           <AbsoluteFill
             style={{
               width: "100%",

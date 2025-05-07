@@ -75,7 +75,7 @@ export const CharactersAlt: React.FC = () => {
 
   return (
     <AbsoluteFill
-      className="flex justify-center items-center bg-white"
+      className="flex justify-center items-center bg-background"
       style={{}}
     >
       <div

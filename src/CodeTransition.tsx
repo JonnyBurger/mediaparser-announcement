@@ -28,7 +28,7 @@ export function CodeTransition({
   readonly topExplainerContent: React.ReactNode;
 }) {
   const frame = useCurrentFrame();
-  const { height, fps, durationInFrames } = useVideoConfig();
+  const { height, fps, durationInFrames, width } = useVideoConfig();
 
   const previousRef = React.useRef<HTMLPreElement>(null);
   const currentRef = React.useRef<HTMLPreElement>(null);
@@ -136,6 +136,8 @@ export function CodeTransition({
     };
   }, []);
 
+  const padX = width > 1044 ? PADDING_X * 2.5 : PADDING_X;
+
   return (
     <AbsoluteFill>
       <TopExplainer>{topExplainerContent}</TopExplainer>
@@ -148,7 +150,7 @@ export function CodeTransition({
         <AbsoluteFill
           style={{
             paddingTop: paddingY,
-            paddingLeft: PADDING_X,
+            paddingLeft: padX,
             opacity: 0,
           }}
         >
@@ -162,7 +164,7 @@ export function CodeTransition({
         <AbsoluteFill
           style={{
             paddingTop: paddingY,
-            paddingLeft: PADDING_X,
+            paddingLeft: padX,
           }}
         >
           <Pre ref={currentRef} code={code} handlers={handlers} style={style} />
@@ -170,7 +172,7 @@ export function CodeTransition({
         <AbsoluteFill
           style={{
             paddingTop: paddingY,
-            paddingLeft: PADDING_X,
+            paddingLeft: padX,
             opacity: 0,
           }}
         >

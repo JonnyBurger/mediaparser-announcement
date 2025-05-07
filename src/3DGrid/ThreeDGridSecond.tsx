@@ -104,7 +104,7 @@ const ThreeDGridSecondInternal = () => {
 
   return (
     <AbsoluteFill
-      className="bg-white"
+      className="bg-background"
       style={{
         perspective: 2000,
       }}

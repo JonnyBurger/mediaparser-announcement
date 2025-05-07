@@ -44,6 +44,20 @@ const getCodeSnippets = (compositionId: string) => {
       { durationInFrames: 240, filename: "async/code7.tsx" },
     ];
   }
+  if (compositionId === "Callbacks") {
+    return [
+      { durationInFrames: 360, filename: "callbacks/code1.tsx" },
+      { durationInFrames: 240, filename: "callbacks/code2.tsx" },
+    ];
+  }
+
+  if (compositionId === "Worker") {
+    return [
+      { durationInFrames: 240, filename: "worker/code1.tsx" },
+      { durationInFrames: 150, filename: "worker/code2.tsx" },
+      { durationInFrames: 240, filename: "worker/code3.tsx" },
+    ];
+  }
 
   throw new Error(`Unknown composition id: ${compositionId}`);
 };

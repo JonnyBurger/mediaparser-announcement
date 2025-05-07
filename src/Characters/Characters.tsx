@@ -51,8 +51,10 @@ export const Characters: React.FC = () => {
 
   return (
     <AbsoluteFill
-      className="flex justify-center items-center bg-white"
-      style={{}}
+      className="flex justify-center items-center "
+      style={{
+        backgroundColor: "#F8FAFC",
+      }}
     >
       <div
         style={{

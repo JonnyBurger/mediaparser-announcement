@@ -47,13 +47,13 @@ export const Master: React.FC = () => {
         <TransitionSeries.Sequence durationInFrames={70}>
           <DecodeCloseUp />
         </TransitionSeries.Sequence>
-        <TransitionSeries.Sequence durationInFrames={195}>
+        <TransitionSeries.Sequence durationInFrames={205}>
           <AudioVisSecondScene />
           <Sequence from={150}>
             <MediaParserEndCard />
           </Sequence>
         </TransitionSeries.Sequence>
-        <TransitionSeries.Sequence durationInFrames={120} offset={-15}>
+        <TransitionSeries.Sequence durationInFrames={120} offset={-14}>
           <OutTransition />
         </TransitionSeries.Sequence>
       </TransitionSeries>

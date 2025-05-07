@@ -74,7 +74,7 @@ export const DecodeCloseUpTwo: React.FC<{
   const rotateX = interpolate(motion, [0, 1], [rotateXStart, rotateXEnd]);
   return (
     <Sequence from={-0}>
-      <AbsoluteFill className="bg-white flex justify-center items-center">
+      <AbsoluteFill className="bg-background flex justify-center items-center">
         <TranslateX px={translateX}>
           <TranslateY px={translateY}>
             <RotateX radians={rotateX}>
