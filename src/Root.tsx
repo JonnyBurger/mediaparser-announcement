@@ -26,6 +26,8 @@ import { ThreeDGridSecond } from "./3DGrid/ThreeDGridSecond";
 import { MediaParserEndCard } from "./MediaParserEndCard";
 import { LowerThird } from "./LowerThird";
 import { UseCases } from "./UseCases/UseCases";
+import { WebAPIs } from "./WebAPIs";
+import { Embrace } from "./Embrace";
 
 export const RemotionRoot = () => {
   return (
@@ -151,6 +153,42 @@ export const RemotionRoot = () => {
               value: 1920,
             },
             topExplainerContent: "Workers",
+          }}
+          fps={30}
+          height={1080}
+          calculateMetadata={calculateMetadata}
+          schema={schema}
+        />
+        <Composition
+          id="Downloads"
+          component={CodeAnimations}
+          defaultProps={{
+            steps: null,
+            themeColors: null,
+            theme: "github-light" as const,
+            width: {
+              type: "fixed",
+              value: 1920,
+            },
+            topExplainerContent: "Download and parse media",
+          }}
+          fps={30}
+          height={1080}
+          calculateMetadata={calculateMetadata}
+          schema={schema}
+        />
+        <Composition
+          id="ForeignMedia"
+          component={CodeAnimations}
+          defaultProps={{
+            steps: null,
+            themeColors: null,
+            theme: "github-light" as const,
+            width: {
+              type: "fixed",
+              value: 1044,
+            },
+            topExplainerContent: "Foreign media",
           }}
           fps={30}
           height={1080}
@@ -353,9 +391,57 @@ export const RemotionRoot = () => {
         width={1920}
         height={1080}
         fps={30}
-        durationInFrames={30 * 30}
+        durationInFrames={18 * 30}
         defaultProps={{
           delay: 0,
+        }}
+      />
+      <Composition
+        id="WebAPIs"
+        component={WebAPIs}
+        width={1920 / 2}
+        height={1080}
+        fps={30}
+        durationInFrames={18 * 30}
+        defaultProps={{
+          api1: {
+            name: "fetch()",
+            color: "#618EC1",
+          },
+          api2: {
+            name: "VideoDecoder",
+            color: "#B067E3",
+          },
+          api3: {
+            name: "AudioData",
+            color: "#618EC1",
+          },
+          title1: "Integrates with",
+          title2: "Web APIs",
+        }}
+      />
+      <Composition
+        id="Embrace"
+        component={Embrace}
+        width={1920}
+        height={1080}
+        fps={30}
+        durationInFrames={18 * 30}
+        defaultProps={{
+          api1: {
+            name: "fetch()",
+            color: "#618EC1",
+          },
+          api2: {
+            name: "VideoDecoder",
+            color: "#B067E3",
+          },
+          api3: {
+            name: "AudioData",
+            color: "#618EC1",
+          },
+          title1: "Integrates with",
+          title2: "Web APIs",
         }}
       />
     </>

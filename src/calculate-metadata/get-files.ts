@@ -59,6 +59,24 @@ const getCodeSnippets = (compositionId: string) => {
     ];
   }
 
+  if (compositionId === "Downloads") {
+    return [
+      { durationInFrames: 120, filename: "download/code1.tsx" },
+      { durationInFrames: 120, filename: "download/code2.tsx" },
+      { durationInFrames: 120, filename: "download/code3.tsx" },
+    ];
+  }
+  if (compositionId === "ForeignMedia") {
+    return [
+      { durationInFrames: 80, filename: "unsupported-media/code0.tsx" },
+      { durationInFrames: 140, filename: "unsupported-media/code1.tsx" },
+      { durationInFrames: 238, filename: "unsupported-media/code2.tsx" },
+      { durationInFrames: 180, filename: "unsupported-media/code3.tsx" },
+      { durationInFrames: 15 * 30, filename: "unsupported-media/code4.tsx" },
+      { durationInFrames: 120, filename: "unsupported-media/code5.tsx" },
+    ];
+  }
+
   throw new Error(`Unknown composition id: ${compositionId}`);
 };
 
