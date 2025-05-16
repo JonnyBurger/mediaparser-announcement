@@ -28,6 +28,7 @@ import { LowerThird } from "./LowerThird";
 import { UseCases } from "./UseCases/UseCases";
 import { WebAPIs } from "./WebAPIs";
 import { Embrace } from "./Embrace";
+import { Chapter } from "./Chapter";
 
 export const RemotionRoot = () => {
   return (
@@ -150,9 +151,9 @@ export const RemotionRoot = () => {
             theme: "github-light" as const,
             width: {
               type: "fixed",
-              value: 1920,
+              value: 960,
             },
-            topExplainerContent: "Workers",
+            topExplainerContent: "WebCodecs API",
           }}
           fps={30}
           height={1080}
@@ -210,7 +211,7 @@ export const RemotionRoot = () => {
           component={ThreeDGrid}
           fps={30}
           height={1080}
-          durationInFrames={60}
+          durationInFrames={240}
           width={1920}
         />
         <Composition
@@ -273,6 +274,14 @@ export const RemotionRoot = () => {
       <Composition
         id="OutTransition"
         component={OutTransition}
+        fps={30}
+        height={1080}
+        durationInFrames={500}
+        width={1920}
+      />
+      <Composition
+        id="Chapter"
+        component={Chapter}
         fps={30}
         height={1080}
         durationInFrames={500}

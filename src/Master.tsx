@@ -53,7 +53,7 @@ export const Master: React.FC = () => {
             <MediaParserEndCard />
           </Sequence>
         </TransitionSeries.Sequence>
-        <TransitionSeries.Sequence durationInFrames={120} offset={-14}>
+        <TransitionSeries.Sequence durationInFrames={120} offset={-11}>
           <OutTransition />
         </TransitionSeries.Sequence>
       </TransitionSeries>
