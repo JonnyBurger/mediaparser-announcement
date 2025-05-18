@@ -30,7 +30,7 @@ export const Grid = () => {
           actualContent
           content="1920"
           width={4}
-          offset={39}
+          offset={41}
           label="width"
         />
       </Sequence>
@@ -44,7 +44,7 @@ export const Grid = () => {
         />
       </Sequence>
       <Sequence from={25}>
-        <Flash actualContent content="30" width={2} offset={87} label="fps" />
+        <Flash actualContent content="30" width={2} offset={90} label="fps" />
       </Sequence>
       <Sequence from={70}>
         <Flash
@@ -64,7 +64,24 @@ export const Grid = () => {
           label="AAC sample"
         />
       </Sequence>
-
+      <Sequence from={78}>
+        <Flash
+          background="#8e44ad"
+          content="10802160234902349"
+          width={5}
+          offset={154 - 16}
+          label="H.264 delta"
+        />
+      </Sequence>
+      <Sequence from={80}>
+        <Flash
+          background="#8e44ad"
+          content="1080216023490234alksjfaklsöf9"
+          width={7}
+          offset={240}
+          label="H.264 delta"
+        />
+      </Sequence>
       <Sequence from={86}>
         <Flash
           background="rgb(16 171 58)"

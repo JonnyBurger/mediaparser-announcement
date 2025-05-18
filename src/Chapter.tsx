@@ -6,10 +6,8 @@ import {
   interpolate,
   random,
   spring,
-  staticFile,
   useCurrentFrame,
   useVideoConfig,
-  Audio,
 } from "remotion";
 
 const columns = 9;
@@ -56,6 +54,7 @@ const Tile: React.FC<{
       <div
         style={{
           backgroundColor: transparentize(1 - (op - delay) * 1.3, "#F7F9FB"),
+          scale: 1.005,
         }}
         className="flex-1 text-gray-400 flex justify-center items-center text-3xl"
       >
@@ -114,32 +113,34 @@ export const Chapter: React.FC = () => {
         scale: frame > 30 ? 1 : interpolate(op, [0, 1], [1.5, 1]),
       }}
     >
-      {Array.from({ length: columns }).map((_, i) =>
-        Array.from({ length: rows }).map((_, j) => (
-          <Tile op={op} column={i} row={j} />
-        )),
-      )}
-      <AbsoluteFill
-        className="justify-center items-center"
-        style={{ overflow: "visible" }}
-      >
-        <div
-          className="text-white text-3xl pl-6 pr-6 flex items-center justify-center"
-          style={{
-            fontFamily: "GT Planar",
-            fontWeight: "500",
-            color: "black",
-            height: height / columns / 2,
-            scale:
-              2 *
-              interpolate(op, [0.4, 1], [0, 1], {
-                extrapolateLeft: "clamp",
-                extrapolateRight: "clamp",
-              }),
-          }}
+      <AbsoluteFill>
+        {Array.from({ length: columns }).map((_, i) =>
+          Array.from({ length: rows }).map((_, j) => (
+            <Tile op={op} column={i} row={j} />
+          )),
+        )}
+        <AbsoluteFill
+          className="justify-center items-center"
+          style={{ overflow: "visible" }}
         >
-          {visualControl("title", "Outlook")}
-        </div>
+          <div
+            className="text-white text-3xl pl-6 pr-6 flex items-center justify-center"
+            style={{
+              fontFamily: "GT Planar",
+              fontWeight: "500",
+              color: "black",
+              height: height / columns / 2,
+              scale:
+                2 *
+                interpolate(op, [0.4, 1], [0, 1], {
+                  extrapolateLeft: "clamp",
+                  extrapolateRight: "clamp",
+                }),
+            }}
+          >
+            {visualControl("title", "License + Business Model")}
+          </div>
+        </AbsoluteFill>
       </AbsoluteFill>
     </AbsoluteFill>
   );

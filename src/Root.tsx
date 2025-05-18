@@ -151,9 +151,9 @@ export const RemotionRoot = () => {
             theme: "github-light" as const,
             width: {
               type: "fixed",
-              value: 960,
+              value: 1920,
             },
-            topExplainerContent: "WebCodecs API",
+            topExplainerContent: "Workers",
           }}
           fps={30}
           height={1080}

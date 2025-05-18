@@ -26,8 +26,8 @@ const getCodeSnippets = (compositionId: string) => {
 
   if (compositionId === "Webcodecs") {
     return [
-      { durationInFrames: 190, filename: "webcodecs/code1.tsx" },
-      { durationInFrames: 240, filename: "webcodecs/code2.tsx" },
+      { durationInFrames: 168, filename: "webcodecs/code1.tsx" },
+      { durationInFrames: 260, filename: "webcodecs/code2.tsx" },
     ];
   }
 

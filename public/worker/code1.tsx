@@ -1,17 +1,6 @@
-// @noErrors
+import { parseMedia } from "@remotion/media-parser";
 
-new VideoDecoder();
-
-new VideoEncoder();
-
-new AudioDecoder();
-
-new AudioEncoder();
-
-new EncodedVideoChunk();
-
-new EncodedAudioChunk();
-
-new AudioData();
-
-new VideoFrame();
+await parseMedia({
+  src: "https://parser.media/video.mp4",
+  // ...
+});
