@@ -5,7 +5,7 @@ import { parseMedia, mediaParserController } from "@remotion/media-parser";
 const controller = mediaParserController();
 
 await parseMedia({
-  src: "https://example.com/video.mp4",
+  src: "https://parser.media/video.mp4",
   controller,
   onVideoTrack: () => {
     return async () => {

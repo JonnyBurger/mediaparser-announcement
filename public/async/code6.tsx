@@ -6,11 +6,11 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 const controller = mediaParserController();
 
 await parseMedia({
-  src: "https://example.com/video.mp4",
+  src: "https://parser.media/video.mp4",
   controller,
-  onVideoTrack: ({ track: { timescale } }) => {
+  onVideoTrack: ({ track }) => {
     return async ({ timestamp }) => {
-      const sec = timestamp / timescale;
+      let sec = timestamp / track.timescale;
 
       // Only read first 10 seconds
       if (sec > 10) {

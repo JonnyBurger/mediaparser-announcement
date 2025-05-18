@@ -4,7 +4,7 @@ import { parseMedia } from "@remotion/media-parser";
 // ---cut---
 
 await parseMedia({
-  src: "https://example.com/video.mp4",
+  src: "https://parser.media/video.mp4",
   onVideoTrack: () => {
     return async (sample) => {
       await waitInQueue();

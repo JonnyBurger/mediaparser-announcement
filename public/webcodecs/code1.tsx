@@ -7,7 +7,7 @@ const decoder = new VideoDecoder({
 });
 
 await parseMedia({
-  src: "https://example.com/video.mp4",
+  src: "https://parser.media/video.mp4",
   onVideoTrack: async ({ track }) => {
     decoder.configure(track);
     

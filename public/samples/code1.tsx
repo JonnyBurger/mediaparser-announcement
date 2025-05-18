@@ -2,7 +2,7 @@ import { parseMedia } from "@remotion/media-parser";
 
 // ---cut---
 await parseMedia({
-  src: "https://example.com/video.webm",
+  src: "https://parser.media/video.webm",
   onVideoTrack: ({ track }) => {
     console.log(track.codec); // "vp8"
     return (sample) => {

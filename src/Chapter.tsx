@@ -1,3 +1,4 @@
+import { visualControl } from "@remotion/studio";
 import { transparentize } from "polished";
 import React from "react";
 import {
@@ -137,7 +138,7 @@ export const Chapter: React.FC = () => {
               }),
           }}
         >
-          Getting frames and waveforms
+          {visualControl("title", "Outlook")}
         </div>
       </AbsoluteFill>
     </AbsoluteFill>

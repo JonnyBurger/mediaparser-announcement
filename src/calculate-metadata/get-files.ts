@@ -13,8 +13,7 @@ const getCodeSnippets = (compositionId: string) => {
       { durationInFrames: 50, filename: "metadata/code2.tsx" },
       { durationInFrames: 40, filename: "metadata/code3.tsx" },
       { durationInFrames: 51, filename: "metadata/code4.tsx" },
-      { durationInFrames: 34, filename: "metadata/code5.tsx" },
-      { durationInFrames: 80, filename: "metadata/code6.tsx" },
+      { durationInFrames: 200, filename: "metadata/code6.tsx" },
     ];
   }
 
