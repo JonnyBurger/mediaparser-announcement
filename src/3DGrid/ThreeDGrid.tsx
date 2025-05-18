@@ -35,11 +35,7 @@ export const ThreeDGrid = () => {
     70,
     z.number().step(1),
   );
-  const endRotateY = visualControl(
-    "three-endRotateY",
-    1,
-    z.number().step(1),
-  );
+  const endRotateY = visualControl("three-endRotateY", 1, z.number().step(1));
   const currentRotateY = interpolate(
     progress,
     [0, 1],
@@ -51,11 +47,7 @@ export const ThreeDGrid = () => {
     52,
     z.number().step(1),
   );
-  const endRotateX = visualControl(
-    "three-endRotateX",
-    -34,
-    z.number().step(1),
-  );
+  const endRotateX = visualControl("three-endRotateX", -34, z.number().step(1));
   const currentRotateX = interpolate(
     progress,
     [0, 1],
@@ -67,11 +59,7 @@ export const ThreeDGrid = () => {
     22,
     z.number().step(1),
   );
-  const endRotateZ = visualControl(
-    "three-endRotateZ",
-    -29,
-    z.number().step(1),
-  );
+  const endRotateZ = visualControl("three-endRotateZ", -29, z.number().step(1));
   const currentRotateZ = interpolate(
     progress,
     [0, 1],
