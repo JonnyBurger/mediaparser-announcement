@@ -8,9 +8,9 @@ const controller = mediaParserController();
 await parseMedia({
   src: "https://example.com/video.mp4",
   controller,
-  onVideoTrack: () => {
-    return async ({ cts, timescale }) => {
-      const sec = cts / timescale;
+  onVideoTrack: ({ track: { timescale } }) => {
+    return async ({ timestamp }) => {
+      const sec = timestamp / timescale;
 
       // Only read first 10 seconds
       if (sec > 10) {

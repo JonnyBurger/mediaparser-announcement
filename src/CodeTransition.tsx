@@ -1,4 +1,10 @@
-import { AbsoluteFill, interpolate, spring, useVideoConfig } from "remotion";
+import {
+  AbsoluteFill,
+  Easing,
+  interpolate,
+  spring,
+  useVideoConfig,
+} from "remotion";
 import { continueRender, delayRender, useCurrentFrame } from "remotion";
 import { Pre, HighlightedCode, AnnotationHandler } from "codehike/code";
 import React, { useLayoutEffect, useMemo } from "react";
@@ -28,7 +34,7 @@ export function CodeTransition({
   readonly topExplainerContent: React.ReactNode;
 }) {
   const frame = useCurrentFrame();
-  const { height, fps, durationInFrames, width } = useVideoConfig();
+  const { height, durationInFrames, width } = useVideoConfig();
 
   const previousRef = React.useRef<HTMLPreElement>(null);
   const currentRef = React.useRef<HTMLPreElement>(null);
@@ -48,28 +54,24 @@ export function CodeTransition({
     return currentCode;
   }, [currentCode]);
 
-  const progress = (delay: number) =>
-    spring({
-      frame,
-      fps,
-      config: {
-        damping: 200,
-      },
-      durationInFrames: 15,
-      delay: delay - 1,
-      durationRestThreshold: 0.001,
+  const progress = ({ delay }: { delay: number }) => {
+    return interpolate(frame, [delay, delay + 7], [0, 1], {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+      easing: Easing.in(Easing.ease),
     });
+  };
 
-  const endProgress = spring({
+  const endProgress = interpolate(
     frame,
-    fps,
-    config: {
-      damping: 200,
+    [durationInFrames - 7, durationInFrames - 1],
+    [0, 1],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+      easing: Easing.out(Easing.ease),
     },
-    durationInFrames: 15,
-    delay: durationInFrames - 9,
-    durationRestThreshold: 0.001,
-  });
+  );
 
   useLayoutEffect(() => {
     const oldSnapshot = getStartingSnapshot(previousRef.current!);
@@ -84,7 +86,7 @@ export function CodeTransition({
         applyStyle({
           element,
           keyframes,
-          progress: progress(options.fill === "both" ? 10 : 0),
+          progress: progress({ delay: options.fill === "both" ? 7 : 0 }),
         });
       }
     });
@@ -117,7 +119,7 @@ export function CodeTransition({
   const oldDimensions = getTextDimensions(prevCode.code);
   const newDimensions = getTextDimensions(code.code);
   const interpolatedHeight = interpolate(
-    progress(0),
+    progress({ delay: 0 }),
     [0, 1],
     [oldDimensions.height, newDimensions.height],
   );

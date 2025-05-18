@@ -8,13 +8,10 @@ const controller = mediaParserController();
 await parseMedia({
   src: "https://example.com/video.mp4",
   controller,
-  onVideoTrack: () => {
-    return async ({ cts, timescale }) => {
+  onVideoTrack: ({ track: { timescale } }) => {
+    return async ({ timestamp }) => {
       // Rewind 5 seconds
-      controller.seek({
-        type: "keyframe-before-time",
-        timeInSeconds: cts / timescale - 5,
-      });
+      controller.seek(timestamp / timescale - 5);
     };
   },
 });
